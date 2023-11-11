@@ -1,0 +1,56 @@
+<div *ngIf="status!=null">
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{status!.error.message}} - {{status!.message}}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="status==null">
+  <div class="d-flex justify-content-center">
+    <h4>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} threads.</h4>
+  </div>
+  <div class="flex justify-content-center m-1">
+    <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+      [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="" [showPageLinks]="false"></p-paginator>
+  </div>
+
+  <div class=" d-flex">
+    <ul class="list-group">
+
+      <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let t of oPage?.content"
+        (click)="doShowReplies(t)" [ngClass]="{active: t.id==activeThread?.id}">
+
+        <div class="ms-2 me-auto">
+          <a href="">{{t.title}}</a>
+        </div>
+        <div class="ms-1">
+          <span class="badge bg-light">
+          <span class="badge text-bg-warning"
+            *ngIf="t.user.username==oSessionService.getUsername()">{{t.user.username}}</span>
+          <span class="badge text-bg-info"
+            *ngIf="t.user.username!=oSessionService.getUsername()">{{t.user.username}}</span>
+          <span class="badge bg-secondary rounded-pill">{{t.replies}}</span>
+        </span>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<p-confirmDialog #cd [style]="{ width: '30vw' }">
+  <ng-template pTemplate="header">
+    <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> Thread removal</h5>
+  </ng-template>
+  <ng-template pTemplate="message">
+    <div class="container d-flex align-items-center justify-content-center">
+      <app-admin-thread-detail-unrouted [id]="oThreadToRemove!.id"></app-admin-thread-detail-unrouted>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <p>¿Are you sure to remove thread?</p>
+    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+    <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+  </ng-template>
+</p-confirmDialog>
