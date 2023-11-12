@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Optional } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IThread } from 'src/app/model/model.interfaces';
-import { ThreadAjaxService } from 'src/app/service/thread.ajax.service.service';
+import { ThreadAjaxService } from 'src/app/service/equipo.ajax.service.service';
 
 @Component({
   selector: 'app-admin-thread-detail-unrouted',

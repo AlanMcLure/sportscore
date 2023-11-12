@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { ReplyAjaxService } from 'src/app/service/reply.ajax.service.service';
+import { ReplyAjaxService } from 'src/app/service/partido.ajax.service.service';
 
 @Component({
   selector: 'app-admin-reply-plist-routed',

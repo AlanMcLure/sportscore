@@ -6,9 +6,9 @@ import { PaginatorState } from 'primeng/paginator';
 import { IReply, IReplyPage, IThread, IUser } from 'src/app/model/model.interfaces';
 import { AdminReplyDetailUnroutedComponent } from '../admin-reply-detail-unrouted/admin-reply-detail-unrouted.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ReplyAjaxService } from 'src/app/service/reply.ajax.service.service';
-import { UserAjaxService } from 'src/app/service/user.ajax.service.service';
-import { ThreadAjaxService } from 'src/app/service/thread.ajax.service.service';
+import { ReplyAjaxService } from 'src/app/service/partido.ajax.service.service';
+import { UserAjaxService } from 'src/app/service/jugador.ajax.service.service';
+import { ThreadAjaxService } from 'src/app/service/equipo.ajax.service.service';
 import { SessionAjaxService } from 'src/app/service/session.ajax.service.ts.service';
 
 

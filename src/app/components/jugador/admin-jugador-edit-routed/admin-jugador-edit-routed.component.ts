@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-user-edit-routed',
-  templateUrl: './admin-user-edit-routed.component.html',
-  styleUrls: ['./admin-user-edit-routed.component.css']
+  selector: 'app-admin-jugador-edit-routed',
+  templateUrl: './admin-jugador-edit-routed.component.html',
+  styleUrls: ['./admin-jugador-edit-routed.component.css']
 })
-export class AdminUserEditRoutedComponent implements OnInit {
+export class AdminJugadorEditRoutedComponent implements OnInit {
 
   id: number = 1;
 

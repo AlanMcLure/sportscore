@@ -23,13 +23,13 @@ import { PaginatorModule } from 'primeng/paginator';
 import { HomeRoutedComponent } from './components/shared/home-routed/home-routed.component';
 import { MenuUnroutedComponent } from './components/shared/menu-unrouted/menu-unrouted.component';
 //--
-import { AdminUserPlistRoutedComponent } from './components/user/admin-user-plist-routed/admin-user-plist-routed.component';
-import { AdminUserViewRoutedComponent } from './components/user/admin-user-view-routed/admin-user-view-routed.component';
-import { AdminUserNewRoutedComponent } from './components/user/admin-user-new-routed/admin-user-new-routed.component';
-import { AdminUserEditRoutedComponent } from './components/user/admin-user-edit-routed/admin-user-edit-routed.component';
-import { AdminUserPlistUnroutedComponent } from './components/user/admin-user-plist-unrouted/admin-user-plist-unrouted.component';
-import { AdminUserDetailUnroutedComponent } from './components/user/admin-user-detail-unrouted/admin-user-detail-unrouted.component';
-import { AdminUserFormUnroutedComponent } from './components/user/admin-user-form-unrouted/admin-user-form-unrouted.component';
+import { AdminJugadorPlistRoutedComponent } from './components/jugador/admin-jugador-plist-routed/admin-jugador-plist-routed.component';
+import { AdminJugadorViewRoutedComponent } from './components/jugador/admin-jugador-view-routed/admin-jugador-view-routed.component';
+import { AdminJugadorNewRoutedComponent } from './components/jugador/admin-jugador-new-routed/admin-jugador-new-routed.component';
+import { AdminJugadorEditRoutedComponent } from './components/jugador/admin-jugador-edit-routed/admin-jugador-edit-routed.component';
+import { AdminJugadorPlistUnroutedComponent } from './components/jugador/admin-jugador-plist-unrouted/admin-jugador-plist-unrouted.component';
+import { AdminJugadorDetailUnroutedComponent } from './components/jugador/admin-jugador-detail-unrouted/admin-jugador-detail-unrouted.component';
+import { AdminJugadorFormUnroutedComponent } from './components/jugador/admin-jugador-form-unrouted/admin-jugador-form-unrouted.component';
 import { AdminReplyEditRoutedComponent } from './components/reply/admin-reply-edit-routed/admin-reply-edit-routed.component';
 import { AdminThreadNewRoutedComponent } from './components/thread/admin-thread-new-routed/admin-thread-new-routed.component';
 import { AdminReplyPlistRoutedComponent } from './components/reply/admin-reply-plist-routed/admin-reply-plist-routed.component';
@@ -44,11 +44,11 @@ import { AdminReplyNewRoutedComponent } from './components/reply/admin-reply-new
 import { AdminReplyFormUnroutedComponent } from './components/reply/admin-reply-form-unrouted/admin-reply-form-unrouted.component';
 import { AdminThreadViewRoutedComponent } from './components/thread/admin-thread-view-routed/admin-thread-view-routed.component';
 import { AdminThreadEditRoutedComponent } from './components/thread/admin-thread-edit-routed/admin-thread-edit-routed.component';
-import { AdminUserSelectionUnroutedComponent } from './components/user/admin-user-selection-unrouted/admin-user-selection-unrouted.component';
+import { AdminJugadorSelectionUnroutedComponent } from './components/jugador/admin-jugador-selection-unrouted/admin-jugador-selection-unrouted.component';
 import { TrimPipe } from './pipes/trim.pipe.ts.pipe';
-import { UserAjaxService } from './service/user.ajax.service.service';
-import { ThreadAjaxService } from './service/thread.ajax.service.service';
-import { ReplyAjaxService } from './service/reply.ajax.service.service';
+import { JugadorAjaxService } from './service/jugador.ajax.service.service';
+import { EquipoAjaxService } from './service/equipo.ajax.service.service';
+import { PartidoAjaxService } from './service/partido.ajax.service.service';
 import { AdminThreadSelectionUnroutedComponent } from './components/thread/admin-thread-selection-unrouted/admin-thread-selection-unrouted.component';
 import { FooterUnroutedComponent } from './components/shared/footer-unrouted/footer-unrouted.component';
 import { LoginRoutedComponent } from './components/shared/login-routed/login-routed.component';
@@ -72,14 +72,14 @@ import { UserThreadFeaturedUnroutedComponent } from './components/thread/user-th
     LoginRoutedComponent,
     LogoutRoutedComponent,
     //--
-    AdminUserPlistRoutedComponent,
-    AdminUserViewRoutedComponent,
-    AdminUserNewRoutedComponent,
-    AdminUserEditRoutedComponent,
-    AdminUserPlistUnroutedComponent,
-    AdminUserDetailUnroutedComponent,
-    AdminUserFormUnroutedComponent,
-    AdminUserSelectionUnroutedComponent,
+    AdminJugadorPlistRoutedComponent,
+    AdminJugadorViewRoutedComponent,
+    AdminJugadorNewRoutedComponent,
+    AdminJugadorEditRoutedComponent,
+    AdminJugadorPlistUnroutedComponent,
+    AdminJugadorDetailUnroutedComponent,
+    AdminJugadorFormUnroutedComponent,
+    AdminJugadorSelectionUnroutedComponent,
     //--
     AdminThreadPlistRoutedComponent,
     AdminThreadViewRoutedComponent,
@@ -131,9 +131,9 @@ import { UserThreadFeaturedUnroutedComponent } from './components/thread/user-th
     DialogService,
     ConfirmationService,
     MatSnackBar,
-    UserAjaxService,
-    ThreadAjaxService,
-    ReplyAjaxService,
+    JugadorAjaxService,
+    EquipoAjaxService,
+    PartidoAjaxService,
     SessionAjaxService,
     CryptoService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

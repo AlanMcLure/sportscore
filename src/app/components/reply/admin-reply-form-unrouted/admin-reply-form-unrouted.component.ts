@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IReply, IThread, IUser, formOperation } from 'src/app/model/model.interfaces';
-import { ReplyAjaxService } from 'src/app/service/reply.ajax.service.service';
+import { ReplyAjaxService } from 'src/app/service/partido.ajax.service.service';
 import { AdminUserSelectionUnroutedComponent } from '../../user/admin-user-selection-unrouted/admin-user-selection-unrouted.component';
 import { AdminThreadSelectionUnroutedComponent } from '../../thread/admin-thread-selection-unrouted/admin-thread-selection-unrouted.component';
 

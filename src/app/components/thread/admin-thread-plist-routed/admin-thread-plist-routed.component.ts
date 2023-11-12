@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { ThreadAjaxService } from 'src/app/service/thread.ajax.service.service';
+import { ThreadAjaxService } from 'src/app/service/equipo.ajax.service.service';
 
 @Component({
   selector: 'app-admin-thread-plist-routed',

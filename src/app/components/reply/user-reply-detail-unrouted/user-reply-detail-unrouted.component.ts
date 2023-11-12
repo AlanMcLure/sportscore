@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, Optional } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IReply } from 'src/app/model/model.interfaces';
-import { ReplyAjaxService } from 'src/app/service/reply.ajax.service.service';
+import { ReplyAjaxService } from 'src/app/service/partido.ajax.service.service';
 
 @Component({
   selector: 'app-user-reply-detail-unrouted',

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IThread, IUser, formOperation } from 'src/app/model/model.interfaces';
 import { AdminUserSelectionUnroutedComponent } from '../../user/admin-user-selection-unrouted/admin-user-selection-unrouted.component';
-import { ThreadAjaxService } from 'src/app/service/thread.ajax.service.service';
+import { ThreadAjaxService } from 'src/app/service/equipo.ajax.service.service';
 
 @Component({
   selector: 'app-admin-thread-form-unrouted',

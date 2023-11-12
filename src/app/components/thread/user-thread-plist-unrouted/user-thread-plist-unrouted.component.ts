@@ -6,8 +6,8 @@ import { PaginatorState } from 'primeng/paginator';
 import { IThread, IThreadPage, IUser } from 'src/app/model/model.interfaces';
 import { AdminThreadDetailUnroutedComponent } from '../admin-thread-detail-unrouted/admin-thread-detail-unrouted.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ThreadAjaxService } from 'src/app/service/thread.ajax.service.service';
-import { UserAjaxService } from 'src/app/service/user.ajax.service.service';
+import { ThreadAjaxService } from 'src/app/service/equipo.ajax.service.service';
+import { UserAjaxService } from 'src/app/service/jugador.ajax.service.service';
 import { SessionAjaxService } from 'src/app/service/session.ajax.service.ts.service';
 
 @Component({

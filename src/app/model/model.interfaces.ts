@@ -1,5 +1,3 @@
-import { HttpErrorResponse } from "@angular/common/http";
-
 export interface Sort {
     empty: boolean;
     sorted: boolean;
@@ -37,40 +35,45 @@ export interface IPage<T> {
 }
 
 export interface IEntity {
-    id: number,
+    id: number;
 }
 
-export interface IUser extends IEntity {
-    name: string,
-    surname: string,
-    lastname: string,
-    email: string,
-    username: string,
-    role: boolean,
-    threads: number,
-    replies: number
+export interface IJugador extends IEntity {
+    nombre: string;
+    apellido_1: string;
+    apellido_2: string;
+    nacionalidad: string;
+    posicion: string;
+    fecha_nacimiento: Date;
+    email: string;
+    username: string;
+    password: string;
+    rol: boolean;
+    equipo: IEquipo;
 }
 
-export interface IUserPage extends IPage<IUser> {
+export interface IJugadorPage extends IPage<IJugador> {
 }
 
-export interface IThread extends IEntity {
-    title: string,
-    user: IUser,
-    replies: number
+export interface IEquipo extends IEntity {
+    nombre: string;
+    pais_origen: string;
+    ciudad_origen: string;
+    fecha_fundacion: Date;
+    entrenador: string;
 }
 
-export interface IThreadPage extends IPage<IThread> {
+export interface IEquipoPage extends IPage<IEquipo> {
 }
 
-export interface IReply extends IEntity {
-    title: string,
-    body: string,
-    user: IUser,
-    thread: IThread
+export interface IPartido extends IEntity {
+    equipo_local: IEquipo;
+    equipo_visitante: IEquipo;
+    fecha_partido: Date;
+    resultado: string;
 }
 
-export interface IReplyPage extends IPage<IReply> {
+export interface IPartidoPage extends IPage<IPartido> {
 }
 
 export type formOperation = 'EDIT' | 'NEW';
