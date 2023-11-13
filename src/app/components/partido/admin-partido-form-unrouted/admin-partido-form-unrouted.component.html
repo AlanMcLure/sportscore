@@ -9,7 +9,7 @@
 <div *ngIf="status === null">
   <div class="col-12">
     <div class="d-flex justify-content-center my-3">
-      <form [formGroup]="replyForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="partidoForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <mat-form-field>
             <mat-label>Título:</mat-label>
@@ -29,31 +29,31 @@
             <mat-error *ngIf="hasError('body', 'maxlength')">Excede el límite de caracteres</mat-error>
           </mat-form-field>
         </div>
-        <div formGroupName="user">
+        <div formGroupName="equipo_local">
           <div class="form-group">
             <mat-form-field [style.width.px]=100>
-              <mat-label>USER:</mat-label>
-              <input matInput formControlName="id" placeholder="USER" required readonly>
+              <mat-label>Equipo Local:</mat-label>
+              <input matInput formControlName="id" placeholder="Equipo Local" required readonly>
             </mat-form-field>
             <button class="btn btn-primary" type="button" (click)="onShowUsersSelection()"> <i class="pi pi-search"></i>
-              Find a user</button>
-            {{oReply.user.name}} {{oReply.user.surname}}
+              Find a local team</button>
+            {{oPartido.equipo_local.name}} <!-- Asegúrate de usar la propiedad correcta -->
           </div>
         </div>
-        <div formGroupName="thread">
+        <div formGroupName="equipo_visitante">
           <div class="form-group">
             <mat-form-field [style.width.px]=100>
-              <mat-label>THREAD:</mat-label>
-              <input matInput formControlName="id" placeholder="THREAD" required readonly>
+              <mat-label>Equipo Visitante:</mat-label>
+              <input matInput formControlName="id" placeholder="Equipo Visitante" required readonly>
             </mat-form-field>
-            <button class="btn btn-primary" type="button" (click)="onShowThreadsSelection()"> <i class="pi pi-search"></i>
-              Find a thread</button>
-            {{oReply.thread.title}}
+            <button class="btn btn-primary" type="button" (click)="onShowPartidosSelection()"> <i class="pi pi-search"></i>
+              Find a visiting team</button>
+            {{oPartido.equipo_visitante.name}} <!-- Asegúrate de usar la propiedad correcta -->
           </div>
         </div>
 
         <div class="text-center mt-5">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!replyForm.valid">Save Thread</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!partidoForm.valid">Save Partido</button>
         </div>
       </form>
     </div>

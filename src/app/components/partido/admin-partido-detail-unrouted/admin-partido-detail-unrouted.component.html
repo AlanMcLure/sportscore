@@ -15,24 +15,23 @@
             </tr>
             <tr>
                 <th>id</th>
-                <td>{{oReply.id}}</td>
+                <td>{{oPartido.id}}</td>
             </tr>
             <tr>
-                <th>title</th>
-                <td>{{oReply.title}}</td>
+                <th>equipo_local</th>
+                <td> <a [routerLink]="['/admin','equipo','view',oPartido.equipo_local.id]">{{oPartido.equipo_local.nombre}}</a></td>
             </tr>
             <tr>
-                <th>body</th>
-                <td>{{oReply.body}}</td>
+                <th>equipo_visitante</th>
+                <td> <a [routerLink]="['/admin','equipo','view',oPartido.equipo_visitante.id]">{{oPartido.equipo_visitante.nombre}}</a></td>
             </tr>
             <tr>
-                <th>user</th>
-                <td> <a [routerLink]="['/admin','user','view',oReply.user.id]">{{oReply.user.name}}
-                        {{oReply.user.surname}}</a></td>
+                <th>fecha_partido</th>
+                <td>{{oPartido.fecha_partido | date:'short'}}</td>
             </tr>
             <tr>
-                <th>thread</th>
-                <td> <a [routerLink]="['/admin','thread','view',oReply.thread.id]">{{oReply.thread.title}}</a> </td>
+                <th>resultado</th>
+                <td>{{oPartido.resultado}}</td>
             </tr>
         </tbody>
     </table>

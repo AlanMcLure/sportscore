@@ -3,37 +3,34 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
-import { IReply, IReplyPage, IThread, IUser } from 'src/app/model/model.interfaces';
-import { AdminReplyDetailUnroutedComponent } from '../admin-reply-detail-unrouted/admin-reply-detail-unrouted.component';
+import { IPartido, IPartidoPage, IEquipo } from 'src/app/model/model.interfaces';
+import { AdminPartidoDetailUnroutedComponent } from '../admin-partido-detail-unrouted/admin-partido-detail-unrouted.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ReplyAjaxService } from 'src/app/service/partido.ajax.service.service';
-import { UserAjaxService } from 'src/app/service/jugador.ajax.service.service';
-import { ThreadAjaxService } from 'src/app/service/equipo.ajax.service.service';
+import { PartidoAjaxService } from 'src/app/service/partido.ajax.service.service';  // Cambiado el servicio a partido.ajax.service.service
+import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';  // Cambiado el servicio a equipo.ajax.service.service
 
 @Component({
-  selector: 'app-admin-reply-plist-unrouted',
-  templateUrl: './admin-reply-plist-unrouted.component.html',
-  styleUrls: ['./admin-reply-plist-unrouted.component.css']
+  selector: 'app-admin-partido-plist-unrouted',
+  templateUrl: './admin-partido-plist-unrouted.component.html',
+  styleUrls: ['./admin-partido-plist-unrouted.component.css']
 })
 
-export class AdminReplyPlistUnroutedComponent implements OnInit {
+export class AdminPartidoPlistUnroutedComponent implements OnInit {
 
   @Input() id_user: number = 0; //filter by user
   @Input() id_thread: number = 0; //filter by thread
 
-  oPage: IReplyPage | undefined;
-  oUser: IUser | null = null; // data of user if id_user is set for filter
-  oThread: IThread | null = null; // data of thread if id_thread is set for filter
+  oPage: IPartidoPage | undefined;
+  oEquipo: IEquipo | null = null;
   orderField: string = "id";
   orderDirection: string = "asc";
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
-  oReplyToRemove: IReply | null = null;
+  oPartidoToRemove: IPartido | null = null;
 
   constructor(
-    private oUserAjaxService: UserAjaxService,
-    private oThreadAjaxService: ThreadAjaxService,
-    private oReplyAjaxService: ReplyAjaxService,
+    private oEquipoAjaxService: EquipoAjaxService,
+    private oPartidoAjaxService: PartidoAjaxService,
     public oDialogService: DialogService,
     private oCconfirmationService: ConfirmationService,
     private oMatSnackBar: MatSnackBar
@@ -50,8 +47,8 @@ export class AdminReplyPlistUnroutedComponent implements OnInit {
   }
 
   getPage(): void {
-    this.oReplyAjaxService.getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_user, this.id_thread).subscribe({
-      next: (data: IReplyPage) => {
+    this.oPartidoAjaxService.getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_user).subscribe({
+      next: (data: IPartidoPage) => {
         this.oPage = data;
         this.oPaginatorState.pageCount = data.totalPages;
         console.log(this.oPaginatorState);
@@ -80,12 +77,12 @@ export class AdminReplyPlistUnroutedComponent implements OnInit {
 
   ref: DynamicDialogRef | undefined;
 
-  doView(u: IReply) {
-    this.ref = this.oDialogService.open(AdminReplyDetailUnroutedComponent, {
+  doView(u: IPartido) {
+    this.ref = this.oDialogService.open(AdminPartidoDetailUnroutedComponent, {
       data: {
         id: u.id
       },
-      header: 'View of reply',
+      header: 'View of Partido',
       width: '50%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
@@ -93,12 +90,12 @@ export class AdminReplyPlistUnroutedComponent implements OnInit {
     });
   }
 
-  doRemove(u: IReply) {
-    this.oReplyToRemove = u;
+  doRemove(u: IPartido) {
+    this.oPartidoToRemove = u;
     this.oCconfirmationService.confirm({
       accept: () => {
         this.oMatSnackBar.open("The reply has been removed.", '', { duration: 2000 });
-        this.oReplyAjaxService.removeOne(this.oReplyToRemove?.id).subscribe({
+        this.oPartidoAjaxService.removeOne(this.oPartidoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
           },
@@ -114,29 +111,15 @@ export class AdminReplyPlistUnroutedComponent implements OnInit {
     });
   }
 
-  getUser(): void {
-    this.oUserAjaxService.getOne(this.id_user).subscribe({
-      next: (data: IUser) => {
-        this.oUser = data;
+  getEquipo(): void {
+    this.oEquipoAjaxService.getOne(this.id_user).subscribe({
+      next: (data: IEquipo) => {
+        this.oEquipo = data;
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;
       }
-
     })
   }
-
-  getThread(): void {
-    this.oThreadAjaxService.getOne(this.id_thread).subscribe({
-      next: (data: IThread) => {
-        this.oThread = data;
-      },
-      error: (error: HttpErrorResponse) => {
-        this.status = error;
-      }
-
-    })
-  }
-
 
 }

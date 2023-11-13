@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  templateUrl: './admin-reply-edit-routed.component.html',
-  styleUrls: ['./admin-reply-edit-routed.component.css']
+  templateUrl: './admin-partido-edit-routed.component.html',
+  styleUrls: ['./admin-partido-edit-routed.component.css']
 })
-export class AdminReplyEditRoutedComponent implements OnInit{
+export class AdminPartidoEditRoutedComponent implements OnInit{
 
   id: number = 1;
 

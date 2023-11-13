@@ -11,11 +11,11 @@ interface IReply {
 }
 
 @Component({
-  selector: 'app-admin-reply-view-routed',
-  templateUrl: './admin-reply-view-routed.component.html',
-  styleUrls: ['./admin-reply-view-routed.component.css']
+  selector: 'app-admin-partido-view-routed',
+  templateUrl: './admin-partido-view-routed.component.html',
+  styleUrls: ['./admin-partido-view-routed.component.css']
 })
-export class AdminReplyViewRoutedComponent implements OnInit {
+export class AdminPartidoViewRoutedComponent implements OnInit {
 
   id: number = 1;
   constructor(
