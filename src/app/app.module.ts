@@ -30,36 +30,34 @@ import { AdminJugadorEditRoutedComponent } from './components/jugador/admin-juga
 import { AdminJugadorPlistUnroutedComponent } from './components/jugador/admin-jugador-plist-unrouted/admin-jugador-plist-unrouted.component';
 import { AdminJugadorDetailUnroutedComponent } from './components/jugador/admin-jugador-detail-unrouted/admin-jugador-detail-unrouted.component';
 import { AdminJugadorFormUnroutedComponent } from './components/jugador/admin-jugador-form-unrouted/admin-jugador-form-unrouted.component';
-import { AdminReplyEditRoutedComponent } from './components/reply/admin-reply-edit-routed/admin-reply-edit-routed.component';
-import { AdminThreadNewRoutedComponent } from './components/thread/admin-thread-new-routed/admin-thread-new-routed.component';
-import { AdminReplyPlistRoutedComponent } from './components/reply/admin-reply-plist-routed/admin-reply-plist-routed.component';
-import { AdminThreadPlistUnroutedComponent } from './components/thread/admin-thread-plist-unrouted/admin-thread-plist-unrouted.component';
-import { AdminThreadDetailUnroutedComponent } from './components/thread/admin-thread-detail-unrouted/admin-thread-detail-unrouted.component';
-import { AdminReplyPlistUnroutedComponent } from './components/reply/admin-reply-plist-unrouted/admin-reply-plist-unrouted.component';
-import { AdminReplyDetailUnroutedComponent } from './components/reply/admin-reply-detail-unrouted/admin-reply-detail-unrouted.component';
-import { AdminThreadPlistRoutedComponent } from './components/thread/admin-thread-plist-routed/admin-thread-plist-routed.component';
-import { AdminThreadFormUnroutedComponent } from './components/thread/admin-thread-form-unrouted/admin-thread-form-unrouted.component';
-import { AdminReplyViewRoutedComponent } from './components/reply/admin-reply-view-routed/admin-reply-view-routed.component';
-import { AdminReplyNewRoutedComponent } from './components/reply/admin-reply-new-routed/admin-reply-new-routed.component';
-import { AdminReplyFormUnroutedComponent } from './components/reply/admin-reply-form-unrouted/admin-reply-form-unrouted.component';
-import { AdminThreadViewRoutedComponent } from './components/thread/admin-thread-view-routed/admin-thread-view-routed.component';
-import { AdminThreadEditRoutedComponent } from './components/thread/admin-thread-edit-routed/admin-thread-edit-routed.component';
+import { AdminReplyEditRoutedComponent } from './components/partido/admin-reply-edit-routed/admin-reply-edit-routed.component';
+import { AdminEquipoNewRoutedComponent } from './components/equipo/admin-equipo-new-routed/admin-equipo-new-routed.component';
+import { AdminReplyPlistRoutedComponent } from './components/partido/admin-reply-plist-routed/admin-reply-plist-routed.component';
+import { AdminEquipoPlistUnroutedComponent } from './components/equipo/admin-equipo-plist-unrouted/admin-equipo-plist-unrouted.component';
+import { AdminEquipoDetailUnroutedComponent } from './components/equipo/admin-equipo-detail-unrouted/admin-equipo-detail-unrouted.component';
+import { AdminReplyPlistUnroutedComponent } from './components/partido/admin-reply-plist-unrouted/admin-reply-plist-unrouted.component';
+import { AdminReplyDetailUnroutedComponent } from './components/partido/admin-reply-detail-unrouted/admin-reply-detail-unrouted.component';
+import { AdminEquipoPlistRoutedComponent } from './components/equipo/admin-equipo-plist-routed/admin-equipo-plist-routed.component';
+import { AdminEquipoFormUnroutedComponent } from './components/equipo/admin-equipo-form-unrouted/admin-equipo-form-unrouted.component';
+import { AdminReplyViewRoutedComponent } from './components/partido/admin-reply-view-routed/admin-reply-view-routed.component';
+import { AdminReplyNewRoutedComponent } from './components/partido/admin-reply-new-routed/admin-reply-new-routed.component';
+import { AdminReplyFormUnroutedComponent } from './components/partido/admin-reply-form-unrouted/admin-reply-form-unrouted.component';
+import { AdminEquipoViewRoutedComponent } from './components/equipo/admin-equipo-view-routed/admin-equipo-view-routed.component';
+import { AdminEquipoEditRoutedComponent } from './components/equipo/admin-equipo-edit-routed/admin-equipo-edit-routed.component';
 import { AdminJugadorSelectionUnroutedComponent } from './components/jugador/admin-jugador-selection-unrouted/admin-jugador-selection-unrouted.component';
 import { TrimPipe } from './pipes/trim.pipe.ts.pipe';
 import { JugadorAjaxService } from './service/jugador.ajax.service.service';
 import { EquipoAjaxService } from './service/equipo.ajax.service.service';
 import { PartidoAjaxService } from './service/partido.ajax.service.service';
-import { AdminThreadSelectionUnroutedComponent } from './components/thread/admin-thread-selection-unrouted/admin-thread-selection-unrouted.component';
+import { AdminEquipoSelectionUnroutedComponent } from './components/equipo/admin-equipo-selection-unrouted/admin-equipo-selection-unrouted.component';
 import { FooterUnroutedComponent } from './components/shared/footer-unrouted/footer-unrouted.component';
 import { LoginRoutedComponent } from './components/shared/login-routed/login-routed.component';
 import { SessionAjaxService } from './service/session.ajax.service.ts.service';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { LogoutRoutedComponent } from './components/shared/logout-routed/logout-routed.component';
-import { UserThreadPlistUnroutedComponent } from './components/thread/user-thread-plist-unrouted/user-thread-plist-unrouted.component';
-import { UserReplyPlistUnroutedComponent } from './components/reply/user-reply-plist-unrouted/user-reply-plist-unrouted.component';
+import { UserReplyPlistUnroutedComponent } from './components/partido/user-reply-plist-unrouted/user-reply-plist-unrouted.component';
 import { CryptoService } from './service/crypto.service';
-import { UserReplyDetailUnroutedComponent } from './components/reply/user-reply-detail-unrouted/user-reply-detail-unrouted.component';
-import { UserThreadFeaturedUnroutedComponent } from './components/thread/user-thread-featured-unrouted/user-thread-featured-unrouted.component';
+import { UserReplyDetailUnroutedComponent } from './components/partido/user-reply-detail-unrouted/user-reply-detail-unrouted.component';
 
 //--
 @NgModule({
@@ -81,17 +79,15 @@ import { UserThreadFeaturedUnroutedComponent } from './components/thread/user-th
     AdminJugadorFormUnroutedComponent,
     AdminJugadorSelectionUnroutedComponent,
     //--
-    AdminThreadPlistRoutedComponent,
-    AdminThreadViewRoutedComponent,
-    AdminThreadNewRoutedComponent,
-    AdminThreadEditRoutedComponent,
-    AdminThreadPlistUnroutedComponent,
-    AdminThreadDetailUnroutedComponent,
-    AdminThreadFormUnroutedComponent,
-    AdminThreadSelectionUnroutedComponent,
-    UserThreadFeaturedUnroutedComponent,
+    AdminEquipoPlistRoutedComponent,
+    AdminEquipoViewRoutedComponent,
+    AdminEquipoNewRoutedComponent,
+    AdminEquipoEditRoutedComponent,
+    AdminEquipoPlistUnroutedComponent,
+    AdminEquipoDetailUnroutedComponent,
+    AdminEquipoFormUnroutedComponent,
+    AdminEquipoSelectionUnroutedComponent,
     //--
-    UserThreadPlistUnroutedComponent,
     UserReplyPlistUnroutedComponent,
     UserReplyDetailUnroutedComponent,
     //--
