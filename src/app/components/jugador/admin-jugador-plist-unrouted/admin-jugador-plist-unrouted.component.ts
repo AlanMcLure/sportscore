@@ -1,12 +1,13 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
-import { IJugador, IJugadorPage } from 'src/app/model/model.interfaces';
+import { IEquipo, IJugador, IJugadorPage } from 'src/app/model/model.interfaces';
 import { AdminJugadorDetailUnroutedComponent } from '../admin-jugador-detail-unrouted/admin-jugador-detail-unrouted.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JugadorAjaxService } from 'src/app/service/jugador.ajax.service.service';
+import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
 
 @Component({
   selector: 'app-admin-jugador-plist-unrouted',
@@ -19,14 +20,17 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
   @Input() equipo_id: number = 0;
 
   oPage: IJugadorPage | undefined;
+  oEquipo: IEquipo | null = null;
   orderField: string = "id";
   orderDirection: string = "asc";
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   oJugadorToRemove: IJugador | null = null;
+  ref: DynamicDialogRef | undefined;
 
   constructor(
     private oJugadorAjaxService: JugadorAjaxService,
+    private oEquipoAjaxService: EquipoAjaxService,
     public oDialogService: DialogService,
     private oCconfirmationService: ConfirmationService,
     private oMatSnackBar: MatSnackBar
@@ -34,6 +38,9 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
+    if (this.equipo_id > 0) {
+      this.getEquipo();
+    }
   }
 
   getPage(): void {
@@ -49,7 +56,6 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
         next: (data: IJugadorPage) => {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
-          console.log(this.oPaginatorState);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -57,7 +63,7 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
       });
   }
 
-  onPageChange(event: PaginatorState) {
+  onPageChang(event: PaginatorState) {
     this.oPaginatorState.rows = event.rows;
     this.oPaginatorState.page = event.page;
     this.getPage();
@@ -73,14 +79,12 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  ref: DynamicDialogRef | undefined;
-
   doView(j: IJugador) {
     this.ref = this.oDialogService.open(AdminJugadorDetailUnroutedComponent, {
       data: {
         id: j.id
       },
-      header: 'View of player',
+      header: 'Vista del jugador',
       width: '50%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
@@ -92,21 +96,33 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
     this.oJugadorToRemove = j;
     this.oCconfirmationService.confirm({
       accept: () => {
-        this.oMatSnackBar.open("The player has been removed.", '', { duration: 2000 });
+        this.oMatSnackBar.open("El jugador ha sido borrado.", "", { duration: 2000 });
         this.oJugadorAjaxService.removeOne(this.oJugadorToRemove?.id).subscribe({
           next: () => {
             this.getPage();
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.oMatSnackBar.open("The player hasn't been removed.", "", { duration: 2000 });
+            this.oMatSnackBar.open("El jugador no ha sido borrado.", "", { duration: 2000 });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.oMatSnackBar.open("The player hasn't been removed.", "", { duration: 2000 });
+        this.oMatSnackBar.open("El jugador no ha sido borrado.", "", { duration: 2000 });
       }
     });
+  }
+
+  getEquipo(): void {
+    this.oEquipoAjaxService.getOne(this.equipo_id).subscribe({
+      next: (data: IEquipo) => {
+        this.oEquipo = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
+
+    })
   }
 
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-jugador-new-routed',
@@ -8,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class AdminJugadorNewRoutedComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
   }

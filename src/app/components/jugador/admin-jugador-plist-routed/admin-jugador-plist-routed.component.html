@@ -6,7 +6,7 @@
       </div>
       <div class="card text-center m-5" *ngIf="bLoading">
         <div class="card-body">
-          <h3 class="text-danger">Processing... wait, please.</h3>
+          <h3 class="text-danger">Procesando... espera, por favor.</h3>
           <div class="spinner-grow text-primary my-5" role="status">
             <span class="sr-only"></span>
           </div>
@@ -26,6 +26,7 @@
       </div>
     </div>
     <app-admin-jugador-plist-unrouted
+      [equipo_id]="equipo_id"
       *ngIf="!bLoading"
     ></app-admin-jugador-plist-unrouted>
   </div>

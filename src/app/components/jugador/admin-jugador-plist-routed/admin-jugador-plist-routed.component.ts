@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { JugadorAjaxService } from 'src/app/service/jugador.ajax.service.service';
 
 @Component({
@@ -10,12 +11,16 @@ import { JugadorAjaxService } from 'src/app/service/jugador.ajax.service.service
 })
 export class AdminJugadorPlistRoutedComponent implements OnInit {
 
+  equipo_id: number;
   bLoading: boolean = false;
 
   constructor(
+    private oActivatedRoute: ActivatedRoute,
     private oJugadorAjaxService: JugadorAjaxService,
     private oMatSnackBar: MatSnackBar
-  ) { }
+  ) {
+    this.equipo_id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") ?? "0");
+  }
 
   ngOnInit() { }
 
@@ -23,11 +28,11 @@ export class AdminJugadorPlistRoutedComponent implements OnInit {
     this.bLoading = true;    
     this.oJugadorAjaxService.generateRandom(amount).subscribe({
       next: (oResponse: number) => {
-        this.oMatSnackBar.open("Now there are " + oResponse + " players", '', { duration: 2000 });
+        this.oMatSnackBar.open("Ahora hay " + oResponse + " jugadores", '', { duration: 2000 });
         this.bLoading = false;
       },
       error: (oError: HttpErrorResponse) => {
-        this.oMatSnackBar.open("Error generating players: " + oError.message, '', { duration: 2000 });
+        this.oMatSnackBar.open("Error al generar los jugadores: " + oError.message, '', { duration: 2000 });
         this.bLoading = false;
       },
     })

@@ -20,62 +20,62 @@
               required
               readonly
             />
-            <mat-hint align="end">(can't change this number)</mat-hint>
+            <mat-hint align="end">(no se puede cambiar este número)</mat-hint>
           </mat-form-field>
         </div>
         <div class="form-group">
           <mat-form-field [style.width.px]="350">
-            <mat-label>Name:</mat-label>
+            <mat-label>Nombre:</mat-label>
             <input
               matInput
               formControlName="nombre"
               placeholder="Name"
               required
             />
-            <mat-hint align="end">(3 to 255 characters long)</mat-hint>
+            <mat-hint align="end">(3 a 255 carácteres)</mat-hint>
             <mat-error *ngIf="hasError('nombre', 'required')"
-              >Name is required</mat-error
+              >El nombre es requerido</mat-error
             >
             <mat-error *ngIf="hasError('nombre', 'minlength')"
-              >More length is required</mat-error
+              >Requiere más carácteres</mat-error
             >
             <mat-error *ngIf="hasError('nombre', 'maxlength')"
-              >Limit exceed</mat-error
+              >Límite excedido</mat-error
             >
           </mat-form-field>
         </div>
         <div class="form-group">
           <mat-form-field [style.width.px]="350">
-            <mat-label>Surname:</mat-label>
+            <mat-label>1er Apellido:</mat-label>
             <input
               matInput
-              formControlName="apellido1"
-              placeholder="Surname"
+              formControlName="apellido_1"
+              placeholder="1er Apellido"
               required
             />
-            <mat-hint align="end">(3 to 255 characters long)</mat-hint>
-            <mat-error *ngIf="hasError('apellido1', 'required')"
-              >Surname is required</mat-error
+            <mat-hint align="end">(3 a 255 carácteres)</mat-hint>
+            <mat-error *ngIf="hasError('apellido_1', 'required')"
+              >1er Apellido requerido</mat-error
             >
-            <mat-error *ngIf="hasError('apellido1', 'minlength')"
-              >More length is required</mat-error
+            <mat-error *ngIf="hasError('apellido_1', 'minlength')"
+              >Requiere más carácteres</mat-error
             >
-            <mat-error *ngIf="hasError('apellido1', 'maxlength')"
-              >Limit exceed</mat-error
+            <mat-error *ngIf="hasError('apellido_1', 'maxlength')"
+              >Límite excedido</mat-error
             >
           </mat-form-field>
         </div>
         <div class="form-group">
           <mat-form-field [style.width.px]="350">
-            <mat-label>Lastname:</mat-label>
+            <mat-label>2ndo Apellido:</mat-label>
             <input
               matInput
-              formControlName="apellido2"
-              placeholder="Lastname"
+              formControlName="apellido_2"
+              placeholder="2ndo Apellido"
             />
-            <mat-hint align="end">(max. 255 characters long)</mat-hint>
-            <mat-error *ngIf="hasError('apellido2', 'maxlength')"
-              >Limit exceed</mat-error
+            <mat-hint align="end">(máx. 255 carácteres)</mat-hint>
+            <mat-error *ngIf="hasError('apellido_2', 'maxlength')"
+              >Límite excedido</mat-error
             >
           </mat-form-field>
         </div>
@@ -89,7 +89,7 @@
               required
             />
             <mat-error *ngIf="hasError('email', 'email')"
-              >Email is not valid</mat-error
+              >Email no es válido</mat-error
             >
           </mat-form-field>
         </div>
@@ -102,34 +102,55 @@
               placeholder="Username"
               required
             />
-            <mat-hint align="end">(6 to 15 alphanumeric)</mat-hint>
+            <mat-hint align="end">(6 to 15 alfanúmerico)</mat-hint>
             <mat-error *ngIf="hasError('username', 'required')"
-              >Username is required</mat-error
+              >Username requerido</mat-error
             >
             <mat-error *ngIf="hasError('username', 'minlength')"
-              >More length is required</mat-error
+              >Requiere más carácteres</mat-error
             >
             <mat-error *ngIf="hasError('username', 'maxlength')"
-              >Limit exceed</mat-error
+              >Límite excedido</mat-error
             >
             <mat-error *ngIf="hasError('username', 'pattern')"
-              >Characters not accepted</mat-error
+              >Carácteres no aceptados</mat-error
             >
           </mat-form-field>
         </div>
 
         <mat-radio-group
-          aria-label="Type of user"
+          aria-label="Tipo de usuario"
           formControlName="rol"
           required
         >
           <mat-radio-button [value]="true">Admin</mat-radio-button>
-          <mat-radio-button [value]="false">User</mat-radio-button>
+          <mat-radio-button [value]="false">Jugador</mat-radio-button>
           <mat-error *ngIf="hasError('rol', 'required')"
-            >User Type is required</mat-error
+            >El tipo de usuario es requerido</mat-error
           >
         </mat-radio-group>
-
+        <div formGroupName="equipo">
+          <div class="form-group">
+            <mat-form-field [style.width.px]="100">
+              <mat-label>Equipo:</mat-label>
+              <input
+                matInput
+                formControlName="id"
+                placeholder="Equipo"
+                required
+                readonly
+              />
+            </mat-form-field>
+            <button
+              class="btn btn-primary"
+              type="button"
+              (click)="onShowUsersSelection()"
+            >
+              <i class="pi pi-search"></i> Busca un equipo
+            </button>
+            {{ oJugador.equipo.nombre }}
+          </div>
+        </div>
         <div class="text-center mt-5">
           <button
             mat-raised-button
@@ -137,7 +158,7 @@
             type="submit"
             [disabled]="!jugadorForm.valid"
           >
-            Save User
+            Guardar Jugador
           </button>
         </div>
       </form>
