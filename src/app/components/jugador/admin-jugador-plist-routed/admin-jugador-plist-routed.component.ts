@@ -19,6 +19,7 @@ export class AdminJugadorPlistRoutedComponent implements OnInit {
     private oJugadorAjaxService: JugadorAjaxService,
     private oMatSnackBar: MatSnackBar
   ) {
+    // El id ese no se si habrá que cambiarlo
     this.equipo_id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") ?? "0");
   }
 

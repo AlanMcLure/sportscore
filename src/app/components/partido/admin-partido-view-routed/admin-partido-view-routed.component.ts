@@ -1,15 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-
-interface IReply {
-  id:number;
-  tittle:string;
-  body:string;
-  id_user:number;
-  id_thread:number;
-}
-
 @Component({
   selector: 'app-admin-partido-view-routed',
   templateUrl: './admin-partido-view-routed.component.html',
@@ -20,7 +11,8 @@ export class AdminPartidoViewRoutedComponent implements OnInit {
   id: number = 1;
   constructor(
     private oActivatedRoute: ActivatedRoute
-  ) { 
+  ) {
+    // No tengo muy claro el id ese
     this.id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") || "1");
   }
 

@@ -2,6 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
+import { Subject } from 'rxjs';
 import { PartidoAjaxService } from 'src/app/service/partido.ajax.service.service';
 
 @Component({
@@ -11,17 +13,18 @@ import { PartidoAjaxService } from 'src/app/service/partido.ajax.service.service
 })
 export class AdminPartidoPlistRoutedComponent implements OnInit {
 
-  equipo_local_id: number;
-  equipo_visitante_id: number;
+  forceReload: Subject<boolean> = new Subject<boolean>();
+  equipo_id: number;
   bLoading: boolean = false;
 
   constructor(
     private oActivatedRoute: ActivatedRoute,
     private oPartidoAjaxService: PartidoAjaxService,
+    private oConfirmationService: ConfirmationService,
     private oMatSnackBar: MatSnackBar
   ) {
-    this.equipo_local_id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("iduser") ?? "0");
-    this.equipo_visitante_id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("idthread") ?? "0");
+    // No se si puede haber problemas aquí
+    this.equipo_id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("equipo_id") ?? "0");
   }
 
   ngOnInit() { }
@@ -30,15 +33,38 @@ export class AdminPartidoPlistRoutedComponent implements OnInit {
     this.bLoading = true;
     this.oPartidoAjaxService.generateRandom(amount).subscribe({
       next: (oResponse: number) => {
-        this.oMatSnackBar.open("Now there are " + oResponse + " replies", '', { duration: 2000 });
+        this.oMatSnackBar.open("Ahora hay " + oResponse + " partidos", '', { duration: 2000 });
         this.bLoading = false;
       },
       error: (oError: HttpErrorResponse) => {
-        this.oMatSnackBar.open("Error generating replies: " + oError.message, '', { duration: 2000 });
+        this.oMatSnackBar.open("Error al generar los partidos: " + oError.message, '', { duration: 2000 });
         this.bLoading = false;
       },
     })
   }
 
+  doEmpty($event: Event) {
+    this.oConfirmationService.confirm({
+      target: $event.target as EventTarget, 
+      message: 'Estas seguro de que quieres borrar todos los partidos?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.oPartidoAjaxService.empty().subscribe({
+          next: (oResponse: number) => {
+            this.oMatSnackBar.open("Ahora hay " + oResponse + " partidos", '', { duration: 2000 });
+            this.bLoading = false;
+            this.forceReload.next(true);
+          },
+          error: (oError: HttpErrorResponse) => {
+            this.oMatSnackBar.open("Error al borrar todos los partidos: " + oError.message, '', { duration: 2000 });
+            this.bLoading = false;
+          },
+        })
+      },
+      reject: () => {
+        this.oMatSnackBar.open("Empty cancelado!", '', { duration: 2000 });
+      }
+    });
+  }
 
 }

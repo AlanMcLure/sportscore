@@ -6,8 +6,9 @@ import { PaginatorState } from 'primeng/paginator';
 import { IPartido, IPartidoPage, IEquipo } from 'src/app/model/model.interfaces';
 import { AdminPartidoDetailUnroutedComponent } from '../admin-partido-detail-unrouted/admin-partido-detail-unrouted.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PartidoAjaxService } from 'src/app/service/partido.ajax.service.service';  // Cambiado el servicio a partido.ajax.service.service
-import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';  // Cambiado el servicio a equipo.ajax.service.service
+import { PartidoAjaxService } from 'src/app/service/partido.ajax.service.service';
+import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-admin-partido-plist-unrouted',
@@ -17,8 +18,8 @@ import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
 
 export class AdminPartidoPlistUnroutedComponent implements OnInit {
 
-  @Input() id_user: number = 0; //filter by user
-  @Input() id_thread: number = 0; //filter by thread
+  @Input() forceReload: Subject<boolean> = new Subject<boolean>();
+  @Input() equipo_id: number = 0; //No se si hacerlo por equipo solo o por local y visitante
 
   oPage: IPartidoPage | undefined;
   oEquipo: IEquipo | null = null;
@@ -38,16 +39,20 @@ export class AdminPartidoPlistUnroutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
-    if (this.id_user > 0) {
-      this.getUser();
+    if (this.equipo_id > 0) {
+      this.getEquipo();
     }
-    if (this.id_thread > 0) {
-      this.getThread();
-    }
+    this.forceReload.subscribe({
+      next: (v) => {
+        if (v) {
+          this.getPage();
+        }
+      }
+    });
   }
 
   getPage(): void {
-    this.oPartidoAjaxService.getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_user).subscribe({
+    this.oPartidoAjaxService.getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.equipo_id).subscribe({
       next: (data: IPartidoPage) => {
         this.oPage = data;
         this.oPaginatorState.pageCount = data.totalPages;
@@ -77,12 +82,12 @@ export class AdminPartidoPlistUnroutedComponent implements OnInit {
 
   ref: DynamicDialogRef | undefined;
 
-  doView(u: IPartido) {
+  doView(p: IPartido) {
     this.ref = this.oDialogService.open(AdminPartidoDetailUnroutedComponent, {
       data: {
-        id: u.id
+        id: p.id
       },
-      header: 'View of Partido',
+      header: 'Vista de Partido',
       width: '50%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
@@ -90,8 +95,8 @@ export class AdminPartidoPlistUnroutedComponent implements OnInit {
     });
   }
 
-  doRemove(u: IPartido) {
-    this.oPartidoToRemove = u;
+  doRemove(p: IPartido) {
+    this.oPartidoToRemove = p;
     this.oCconfirmationService.confirm({
       accept: () => {
         this.oMatSnackBar.open("The reply has been removed.", '', { duration: 2000 });
@@ -112,7 +117,7 @@ export class AdminPartidoPlistUnroutedComponent implements OnInit {
   }
 
   getEquipo(): void {
-    this.oEquipoAjaxService.getOne(this.id_user).subscribe({
+    this.oEquipoAjaxService.getOne(this.equipo_id).subscribe({
       next: (data: IEquipo) => {
         this.oEquipo = data;
       },

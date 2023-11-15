@@ -1,3 +1,4 @@
+<!-- Hay que comprobar cosas aqui aun -->
 <div *ngIf="status!=null">
   <div class="d-flex justify-content-center my-3">
     <div class="alert alert-danger" role="alert">
@@ -8,13 +9,20 @@
 
 <div *ngIf="status==null">
   <div class="d-flex justify-content-between mb-3">
-    <h3 *ngIf="id_thread>0">Filtered by thread ({{id_thread}} - {{oThread?.title | trimming}}) <a type="button"
-        class="btn btn-danger btn-sm" *ngIf="id_thread>0" [routerLink]="['/admin','reply','plist']">reset filter</a>
+    <h3 *ngIf="equipo_id > 0">
+      Filtrado por equipo ({{ equipo_id }} - {{ oEquipo?.nombre }})<a
+        type="button"
+        class="btn btn-danger btn-sm"
+        *ngIf="equipo_id > 0"
+        [routerLink]="['/admin', 'equipo', 'plist']"
+        >resetear filtro</a
+      >
     </h3>
-    <h3 *ngIf="id_user>0">Filtered by user ({{id_user}} - {{oUser?.name}} {{oUser?.surname}}) <a type="button"
-        class="btn btn-danger btn-sm" *ngIf="id_user>0" [routerLink]="['/admin','reply','plist']">reset filter</a></h3>
-    <h3 *ngIf="!(id_user>0)&&!(id_thread>0)">No active filter</h3>
-    <h3>Showing {{oPage?.numberOfElements}} of total {{oPage?.totalElements}} replies</h3>
+    <h3>Sin filtro activo</h3>
+    <h3>
+      Mostrando {{ oPage?.numberOfElements }} de un total de
+      {{ oPage?.totalElements }} partidos.
+    </h3>
   </div>
   <div class="flex justify-content-center mb-3">
     <p-paginator (onPageChange)="onPageChang($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
@@ -27,35 +35,32 @@
       <thead>
         <tr>
           <th (click)="doOrder('id')">ID</th>
-          <th (click)="doOrder('title')">Title</th>
-          <th (click)="doOrder('body')">Body</th>
-          <th (click)="doOrder('user')">User</th>
-          <th (click)="doOrder('thread')">Thread</th>
-          <th>Tools</th>
+          <th (click)="doOrder('equipo_local')">Equipo local</th>
+          <th (click)="doOrder('equipo_visitante')">Equipo visitante</th>
+          <th (click)="doOrder('fecha_partido')">Fecha partido</th>
+          <th (click)="doOrder('resultado')">Resultado</th>
+          <th>Herramientas</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let r of oPage?.content" class="align-middle">
-          <td class="text-end"><strong>{{r.id}}</strong></td>
-          <td>{{r.title| trimming:25}}</td>
-          <td>{{r.body| trimming:50}}</td>
-          <td>
-            <a [routerLink]="['/admin','reply','plist','byuser',r.user.id]">({{r.user.id}}) {{r.user.name}}
-              {{r.user.surname}}</a>
-          </td>
-          <td>
-            <a [routerLink]="['/admin','reply','plist','bythread',r.thread.id]">({{r.thread.id}})
-              {{r.thread.title}}
-            </a>
-          </td>
+        <tr *ngFor="let p of oPage?.content" class="align-middle">
+          <td class="text-end"><strong>{{p.id}}</strong></td>
+          <td><a [routerLink]="['/admin','reply','plist','byequipo',p.equipo_local.id]">
+            ({{p.equipo_local.id}}) {{p.equipo_local.nombre | trimming:25}}</a></td>
+          <td>{{p.equipo_visitante.nombre | trimming:50}}</td>
+          <td><a [routerLink]="['/admin','reply','plist','byequipo',p.equipo_visitante.id]">
+            ({{p.equipo_visitante.id}}) {{p.equipo_visitante.nombre | trimming:25}}</a></td>
+          <td>{{p.equipo_visitante.nombre | trimming:50}}</td>
+          <td>{{ p.fecha_partido }}</td>
+          <td>{{ p.resultado }}</td>
           <td class="text-center">
             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-              <button class="btn btn-primary" [routerLink]="['/admin','reply','view',r.id]"><i
+              <button class="btn btn-primary" [routerLink]="['/admin','reply','view',p.id]"><i
                   class="pi pi-eye"></i></button>
-              <button class="btn btn-primary" (click)="doView(r)"><i class="pi pi-arrow-circle-up"></i></button>
-              <button class="btn btn-warning" [routerLink]="['/admin','reply','edit',r.id]"><i
+              <button class="btn btn-primary" (click)="doView(p)"><i class="pi pi-arrow-circle-up"></i></button>
+              <button class="btn btn-warning" [routerLink]="['/admin','reply','edit',p.id]"><i
                   class="pi pi-pencil"></i></button>
-              <button class="btn btn-danger" (click)="doRemove(r)"><i class="pi pi-trash"></i></button>
+              <button class="btn btn-danger" (click)="doRemove(p)"><i class="pi pi-trash"></i></button>
             </div>
           </td>
         </tr>
@@ -67,15 +72,15 @@
 
 <p-confirmDialog #cd [style]="{ width: '30vw' }">
   <ng-template pTemplate="header">
-    <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> Reply removal</h5>
+    <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> Borrado de partido</h5>
   </ng-template>
   <ng-template pTemplate="message">
     <div class="container d-flex align-items-center justify-content-center">
-      <app-admin-reply-detail-unrouted [id]="oReplyToRemove!.id"></app-admin-reply-detail-unrouted>
+      <app-admin-partido-detail-unrouted [id]="oPartidoToRemove!.id"></app-admin-partido-detail-unrouted>
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
-    <p>¿Are you sure to remove reply?</p>
+    <p>¿Estás seguro de que quieres eliminar este partido?</p>
     <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
     <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
   </ng-template>
