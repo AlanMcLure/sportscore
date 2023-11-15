@@ -17,14 +17,14 @@ export class JugadorAjaxService {
         return this.oHttpClient.get<IJugador>(this.sUrl + "/" + id);
     }
 
-    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, equipoId: number | undefined): Observable<IJugadorPage> {
+    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, equipo_id: number | undefined): Observable<IJugadorPage> {
         if (!size) size = 10;
         if (!page) page = 0;
     
         let strUrlParams = `?size=${size}&page=${page}&sort=${orderField},${orderDirection}`;
     
-        if (equipoId !== undefined && equipoId > 0) {
-            strUrlParams += `&equipoId=${equipoId}`;
+        if (equipo_id !== undefined && equipo_id > 0) {
+            strUrlParams += `&equipo_id=${equipo_id}`;
         }
     
         return this.oHttpClient.get<IJugadorPage>(this.sUrl + strUrlParams);
@@ -50,4 +50,9 @@ export class JugadorAjaxService {
     generateRandom(amount: number): Observable<number> {
         return this.oHttpClient.post<number>(this.sUrl + "/populate/" + amount, null);
     }
+
+    empty(): Observable<number> {
+        return this.oHttpClient.delete<number>(this.sUrl + "/empty");
+    }
+    
 }

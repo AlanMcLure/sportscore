@@ -17,14 +17,19 @@ export class PartidoAjaxService {
         return this.oHttpClient.get<IPartido>(this.sUrl + "/" + id);
     }
 
-    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_partido: number): Observable<IPartidoPage> {
+    // No se si aqui puede afectar la logica de las urls (ver si se filtraria por equipo, o por local y visitante)
+    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, equipo_id: number): Observable<IPartidoPage> {
+        
         if (!size) size = 10;
         if (!page) page = 0;
-        let strUrlPartido = "";
-        if (id_partido > 0) {
-            strUrlPartido = "&partido=" + id_partido;
+
+        let strUrlParams = `?size=${size}&page=${page}&sort=${orderField},${orderDirection}`;
+
+        if (equipo_id !== undefined && equipo_id > 0) {
+            strUrlParams += `&equipo_id=${equipo_id}`;
         }
-        return this.oHttpClient.get<IPartidoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + strUrlPartido);
+
+        return this.oHttpClient.get<IPartidoPage>(this.sUrl + strUrlParams);
     }
 
     removeOne(id: number | undefined): Observable<number> {
@@ -46,4 +51,9 @@ export class PartidoAjaxService {
     generateRandom(amount: number): Observable<number> {
         return this.oHttpClient.post<number>(this.sUrl + "/populate/" + amount, null);
     }
+
+    empty(): Observable<number> {
+        return this.oHttpClient.delete<number>(this.sUrl + "/empty");
+    }
+    
 }
