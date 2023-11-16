@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IThread } from 'src/app/model/model.interfaces';
+import { IEquipo } from 'src/app/model/model.interfaces';
 
 
 
@@ -12,7 +12,7 @@ import { IThread } from 'src/app/model/model.interfaces';
 
 export class HomeRoutedComponent implements OnInit {
 
-  idThread: number = 17;
+  equipo_id: number = 17;
   
 
   constructor(
@@ -22,8 +22,8 @@ export class HomeRoutedComponent implements OnInit {
   ngOnInit() {
   }
 
-  onThreadChange(oThread: IThread) {
-    this.idThread = oThread.id;
+  onEquipoChange(oEquipo: IEquipo) {
+    this.equipo_id = oEquipo.id;
   }
 
 }
