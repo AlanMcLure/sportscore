@@ -2,7 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { JugadorAjaxService } from 'src/app/service/jugador.ajax.service.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-admin-jugador-plist-routed',
@@ -11,12 +13,14 @@ import { JugadorAjaxService } from 'src/app/service/jugador.ajax.service.service
 })
 export class AdminJugadorPlistRoutedComponent implements OnInit {
 
+  forceReload: Subject<boolean> = new Subject<boolean>();
   equipo_id: number;
   bLoading: boolean = false;
 
   constructor(
     private oActivatedRoute: ActivatedRoute,
     private oJugadorAjaxService: JugadorAjaxService,
+    private oConfirmationService: ConfirmationService,
     private oMatSnackBar: MatSnackBar
   ) {
     // El id ese no se si habrá que cambiarlo
@@ -37,6 +41,30 @@ export class AdminJugadorPlistRoutedComponent implements OnInit {
         this.bLoading = false;
       },
     })
+  }
+
+  doEmpty($event: Event) {
+    this.oConfirmationService.confirm({
+      target: $event.target as EventTarget, 
+      message: 'Estas seguro de que quieres borrar todos los jugadores?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.oJugadorAjaxService.empty().subscribe({
+          next: (oResponse: number) => {
+            this.oMatSnackBar.open("Ahora hay " + oResponse + " jugadores", '', { duration: 2000 });
+            this.bLoading = false;
+            this.forceReload.next(true);
+          },
+          error: (oError: HttpErrorResponse) => {
+            this.oMatSnackBar.open("Error al borrar todos los jugadores: " + oError.message, '', { duration: 2000 });
+            this.bLoading = false;
+          },
+        })
+      },
+      reject: () => {
+        this.oMatSnackBar.open("Empty cancelado!", '', { duration: 2000 });
+      }
+    });
   }
 
 }

@@ -77,7 +77,7 @@ export class AdminPartidoFormUnroutedComponent implements OnInit {
           next: (data: IPartido) => {
             this.oPartido = { "equipo_local": {}, "equipo_visitante": {} } as IPartido;
             this.initializeForm(this.oPartido);
-            this.matSnackBar.open("Partido ha sido creado.", '', { duration: 2000 });
+            this.matSnackBar.open("El partido ha sido creado.", '', { duration: 2000 });
             this.router.navigate(['/admin', 'partido', 'view', data]);
           },
           error: (error: HttpErrorResponse) => {
@@ -90,7 +90,7 @@ export class AdminPartidoFormUnroutedComponent implements OnInit {
           next: (data: IPartido) => {
             this.oPartido = data;
             this.initializeForm(this.oPartido);
-            this.matSnackBar.open("Partido ha sido actualizado.", '', { duration: 2000 });
+            this.matSnackBar.open("El partido ha sido actualizado.", '', { duration: 2000 });
             this.router.navigate(['/admin', 'partido', 'view', this.oPartido.id]);
           },
           error: (error: HttpErrorResponse) => {

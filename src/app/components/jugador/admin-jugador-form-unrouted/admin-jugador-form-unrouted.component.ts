@@ -81,12 +81,12 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
           next: (data: IJugador) => {
             this.oJugador = { "equipo": {} } as IJugador;
             this.initializeForm(this.oJugador);
-            this.oMatSnackBar.open("El Jugador ha sido creado.", '', { duration: 2000 });
+            this.oMatSnackBar.open("El jugador ha sido creado.", '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'jugador', 'view', data]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.oMatSnackBar.open("Fallo en la creación del Jugador.", '', { duration: 2000 });
+            this.oMatSnackBar.open("No se ha podido crear el jugador.", '', { duration: 2000 });
           }
         })
       } else {
@@ -94,12 +94,12 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
           next: (data: IJugador) => {
             this.oJugador = data;
             this.initializeForm(this.oJugador);
-            this.oMatSnackBar.open("El Jugador ha sido actualizado.", '', { duration: 2000 });
+            this.oMatSnackBar.open("El jugador ha sido actualizado.", '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'jugador', 'view', this.oJugador.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.oMatSnackBar.open("Fallo al actualizar el Jugador.", '', { duration: 2000 });
+            this.oMatSnackBar.open("No se ha podido actualizar el jugador.", '', { duration: 2000 });
           }
         })
       }

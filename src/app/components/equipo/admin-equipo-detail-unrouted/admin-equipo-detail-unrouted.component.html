@@ -1,42 +1,43 @@
-<div *ngIf="status!=null">
-    <div class="d-flex justify-content-center my-3">
-        <div class="alert alert-danger" role="alert">
-            {{status!.error.message}} - {{status!.message}}
-        </div>
+<div *ngIf="status != null">
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{ status!.error.message }} - {{ status!.message }}
     </div>
+  </div>
 </div>
 
-<div *ngIf="status==null">
-    <table class="table table-striped table-hover">
-        <tbody>
-            <tr>
-                <th>Property</th>
-                <th>Value</th>
-            </tr>
-            <tr>
-                <th>id</th>
-                <td>{{oEquipo.id}}</td>
-            </tr>
-            <tr>
-                <th>nombre</th>
-                <td>{{oEquipo.nombre}}</td>
-            </tr>
-            <tr>
-                <th>pais_origen</th>
-                <td>{{oEquipo.pais_origen}}</td>
-            </tr>
-            <tr>
-                <th>ciudad_origen</th>
-                <td>{{oEquipo.ciudad_origen}}</td>
-            </tr>
-            <tr>
-                <th>fecha_fundacion</th>
-                <td>{{oEquipo.fecha_fundacion | date:'shortDate'}}</td>
-            </tr>
-            <tr>
-                <th>entrenador</th>
-                <td>{{oEquipo.entrenador}}</td>
-            </tr>
-        </tbody>
-    </table>
+<div *ngIf="status == null">
+  <table class="table table-striped table-hover">
+    <tbody>
+      <tr>
+        <th>Propiedad</th>
+        <th>Valor</th>
+      </tr>
+      <tr>
+        <th>Id</th>
+        <td>{{ oEquipo.id }}</td>
+      </tr>
+      <tr>
+        <th>Nombre</th>
+        <td>{{ oEquipo.nombre }}</td>
+      </tr>
+      <tr>
+        <th>País de origen</th>
+        <td>{{ oEquipo.pais_origen }}</td>
+      </tr>
+      <tr>
+        <th>Ciudad de origen</th>
+        <td>{{ oEquipo.ciudad_origen }}</td>
+      </tr>
+      <tr>
+        <th>Fecha de fundación</th>
+        <!-- No se si habrá que hacer algo con las fechas -->
+        <td>{{ oEquipo.fecha_fundacion | date : "shortDate" }}</td>
+      </tr>
+      <tr>
+        <th>Entrenador</th>
+        <td>{{ oEquipo.entrenador }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

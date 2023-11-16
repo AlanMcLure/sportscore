@@ -99,19 +99,19 @@ export class AdminPartidoPlistUnroutedComponent implements OnInit {
     this.oPartidoToRemove = p;
     this.oCconfirmationService.confirm({
       accept: () => {
-        this.oMatSnackBar.open("The reply has been removed.", '', { duration: 2000 });
+        this.oMatSnackBar.open("El partido ha sido borrado.", '', { duration: 2000 });
         this.oPartidoAjaxService.removeOne(this.oPartidoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.oMatSnackBar.open("The reply hasn't been removed.", "", { duration: 2000 });
+            this.oMatSnackBar.open("El partido no ha sido borrado.", "", { duration: 2000 });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.oMatSnackBar.open("The reply hasn't been removed.", "", { duration: 2000 });
+        this.oMatSnackBar.open("El partido no ha sido borrado.", "", { duration: 2000 });
       }
     });
   }

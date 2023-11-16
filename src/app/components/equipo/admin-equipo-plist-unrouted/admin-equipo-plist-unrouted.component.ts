@@ -7,6 +7,7 @@ import { IEquipo, IEquipoPage } from 'src/app/model/model.interfaces';
 import { AdminEquipoDetailUnroutedComponent } from '../admin-equipo-detail-unrouted/admin-equipo-detail-unrouted.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-admin-equipo-plist-unrouted',
@@ -15,6 +16,8 @@ import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
 })
 
 export class AdminEquipoPlistUnroutedComponent implements OnInit {
+
+  @Input() forceReload: Subject<boolean> = new Subject<boolean>();
 
   oPage: IEquipoPage | undefined;
   oEquipo: IEquipo | null = null;
@@ -69,7 +72,7 @@ export class AdminEquipoPlistUnroutedComponent implements OnInit {
       data: {
         id: u.id
       },
-      header: 'View of thread',
+      header: 'Vista de equipo',
       width: '50%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
@@ -81,19 +84,19 @@ export class AdminEquipoPlistUnroutedComponent implements OnInit {
     this.oEquipoToRemove = u;
     this.oConfirmationService.confirm({
       accept: () => {
-        this.oMatSnackBar.open("The thread has been removed.", '', { duration: 2000 });
+        this.oMatSnackBar.open("El equipo ha sido borrado.", '', { duration: 2000 });
         this.oEquipoAjaxService.removeOne(this.oEquipoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.oMatSnackBar.open("The thread hasn't been removed.", "", { duration: 2000 });
+            this.oMatSnackBar.open("El equipo no ha sido borrado.", "", { duration: 2000 });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.oMatSnackBar.open("The thread hasn't been removed.", "", { duration: 2000 });
+        this.oMatSnackBar.open("El equipo no ha sido borrado.", "", { duration: 2000 });
       }
     });
   }

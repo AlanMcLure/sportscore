@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { Subject } from 'rxjs';
 import { PartidoAjaxService } from 'src/app/service/partido.ajax.service.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-admin-partido-plist-routed',

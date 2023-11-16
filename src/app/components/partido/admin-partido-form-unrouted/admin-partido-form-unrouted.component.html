@@ -1,11 +1,11 @@
 <div *ngIf="status !== null">
   <div class="d-flex justify-content-center my-3">
     <div class="alert alert-danger" role="alert">
-      {{status!.error.message}} - {{status!.message}}
+      {{ status!.error.message }} - {{ status!.message }}
     </div>
   </div>
 </div>
-
+<!-- FALTA ARREGLAR EL FORMULARIO (NO ESTÁN FECHA PARTIDO NI RESULTADO) -->
 <div *ngIf="status === null">
   <div class="col-12">
     <div class="d-flex justify-content-center my-3">
@@ -13,48 +13,97 @@
         <div class="form-group">
           <mat-form-field>
             <mat-label>Título:</mat-label>
-            <input matInput formControlName="title" placeholder="Título" required>
+            <input
+              matInput
+              formControlName="title"
+              placeholder="Título"
+              required
+            />
             <mat-hint align="end">(3 a 255 carácteres)</mat-hint>
-            <mat-error *ngIf="hasError('title', 'required')">El título es requerido</mat-error>
-            <mat-error *ngIf="hasError('title', 'minlength')">Se requiere más longitud</mat-error>
-            <mat-error *ngIf="hasError('title', 'maxlength')">Excede el límite</mat-error>
+            <mat-error *ngIf="hasError('title', 'required')"
+              >El título es requerido</mat-error
+            >
+            <mat-error *ngIf="hasError('title', 'minlength')"
+              >Se requiere más longitud</mat-error
+            >
+            <mat-error *ngIf="hasError('title', 'maxlength')"
+              >Excede el límite</mat-error
+            >
           </mat-form-field>
         </div>
         <div class="form-group">
-          <mat-form-field [style.width.px]=500>
+          <mat-form-field [style.width.px]="500">
             <mat-label>Cuerpo:</mat-label>
-            <textarea matInput formControlName="body" placeholder="Cuerpo" required></textarea>
+            <textarea
+              matInput
+              formControlName="body"
+              placeholder="Cuerpo"
+              required
+            ></textarea>
             <mat-hint align="end">(Máximo 1000 carácteres)</mat-hint>
-            <mat-error *ngIf="hasError('body', 'required')">El cuerpo es requerido</mat-error>
-            <mat-error *ngIf="hasError('body', 'maxlength')">Excede el límite de caracteres</mat-error>
+            <mat-error *ngIf="hasError('body', 'required')"
+              >El cuerpo es requerido</mat-error
+            >
+            <mat-error *ngIf="hasError('body', 'maxlength')"
+              >Excede el límite de caracteres</mat-error
+            >
           </mat-form-field>
         </div>
         <!-- No se como va a funcionar esto con mismos equipos -->
         <div formGroupName="equipo_local">
           <div class="form-group">
-            <mat-form-field [style.width.px]=100>
+            <mat-form-field [style.width.px]="100">
               <mat-label>Equipo Local:</mat-label>
-              <input matInput formControlName="id" placeholder="Equipo Local" required readonly>
+              <input
+                matInput
+                formControlName="id"
+                placeholder="Equipo local"
+                required
+                readonly
+              />
             </mat-form-field>
-            <button class="btn btn-primary" type="button" (click)="onShowEquipoLocalSelection()"> <i class="pi pi-search"></i>
-              Busca un equipo local</button>
-            {{oPartido.equipo_local.nombre}}
+            <button
+              class="btn btn-primary"
+              type="button"
+              (click)="onShowEquipoLocalSelection()"
+            >
+              <i class="pi pi-search"></i> Busca un equipo local
+            </button>
+            {{ oPartido.equipo_local.nombre }}
           </div>
         </div>
         <div formGroupName="equipo_visitante">
           <div class="form-group">
-            <mat-form-field [style.width.px]=100>
+            <mat-form-field [style.width.px]="100">
               <mat-label>Equipo Visitante:</mat-label>
-              <input matInput formControlName="id" placeholder="Equipo Visitante" required readonly>
+              <input
+                matInput
+                formControlName="id"
+                placeholder="Equipo visitante"
+                required
+                readonly
+              />
             </mat-form-field>
-            <button class="btn btn-primary" type="button" (click)="onShowEquipoVisitanteSelection()"> <i class="pi pi-search"></i>
-              Busca un equipo visitante</button>
-            {{oPartido.equipo_visitante.nombre}}
+            <button
+              class="btn btn-primary"
+              type="button"
+              (click)="onShowEquipoVisitanteSelection()"
+            >
+              <i class="pi pi-search"></i> Busca un equipo visitante
+            </button>
+            {{ oPartido.equipo_visitante.nombre }}
           </div>
         </div>
 
         <div class="text-center mt-5">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!partidoForm.valid">Save Partido</button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!partidoForm.valid"
+          >
+            Guardar Partido
+          </button>
         </div>
       </form>
     </div>

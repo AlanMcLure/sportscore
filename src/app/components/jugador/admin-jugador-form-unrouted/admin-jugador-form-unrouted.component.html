@@ -12,11 +12,11 @@
       <form [formGroup]="jugadorForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <mat-form-field *ngIf="operation == 'EDIT'">
-            <mat-label>ID:</mat-label>
+            <mat-label>Id:</mat-label>
             <input
               matInput
               formControlName="id"
-              placeholder="ID"
+              placeholder="Id"
               required
               readonly
             />
@@ -29,7 +29,7 @@
             <input
               matInput
               formControlName="nombre"
-              placeholder="Name"
+              placeholder="Nombre"
               required
             />
             <mat-hint align="end">(3 a 255 carácteres)</mat-hint>

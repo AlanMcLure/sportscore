@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IEquipo, formOperation } from 'src/app/model/model.interfaces';
 import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
 
@@ -21,14 +20,11 @@ export class AdminEquipoFormUnroutedComponent implements OnInit {
   oEquipo: IEquipo = {} as IEquipo;
   status: HttpErrorResponse | null = null;
 
-  oDynamicDialogRef: DynamicDialogRef | undefined;
-
   constructor(
     private formBuilder: FormBuilder,
     private equipoAjaxService: EquipoAjaxService,
     private router: Router,
-    private oMatSnackBar: MatSnackBar,
-    public oDialogService: DialogService
+    private oMatSnackBar: MatSnackBar
   ) {
     this.initializeForm(this.oEquipo);
   }
@@ -53,7 +49,7 @@ export class AdminEquipoFormUnroutedComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          this.oMatSnackBar.open("Error reading equipo from server.", '', { duration: 2000 });
+          this.oMatSnackBar.open("Error leyendo equipo desde el server.", '', { duration: 2000 });
         }
       })
     } else {
@@ -70,14 +66,14 @@ export class AdminEquipoFormUnroutedComponent implements OnInit {
       if (this.operation === 'NEW') {
         this.equipoAjaxService.newOne(this.equipoForm.value).subscribe({
           next: (data: IEquipo) => {
-            this.oEquipo = {} as IEquipo;
-            this.initializeForm(this.oEquipo); // el id se genera en el servidor
-            this.oMatSnackBar.open('Equipo has been created.', '', { duration: 2000 });
-            this.router.navigate(['/admin', 'equipo', 'view', data.id]);
+            this.oEquipo = data;
+            this.initializeForm(this.oEquipo);
+            this.oMatSnackBar.open('El equipo ha sido creado.', '', { duration: 2000 });
+            this.router.navigate(['/admin', 'equipo', 'view', this.oEquipo]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.oMatSnackBar.open('Failed to create equipo.', '', { duration: 2000 });
+            this.oMatSnackBar.open('No se ha podido crear el equipo.', '', { duration: 2000 });
           }
         });
       } else {
@@ -85,12 +81,12 @@ export class AdminEquipoFormUnroutedComponent implements OnInit {
           next: (data: IEquipo) => {
             this.oEquipo = data;
             this.initializeForm(this.oEquipo);
-            this.oMatSnackBar.open('Equipo has been updated.', '', { duration: 2000 });
+            this.oMatSnackBar.open('El equipo ha sido actualizado.', '', { duration: 2000 });
             this.router.navigate(['/admin', 'equipo', 'view', this.oEquipo.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.oMatSnackBar.open('Failed to update equipo.', '', { duration: 2000 });
+            this.oMatSnackBar.open('No se ha podido actualizar el equipo.', '', { duration: 2000 });
           }
         });
       }

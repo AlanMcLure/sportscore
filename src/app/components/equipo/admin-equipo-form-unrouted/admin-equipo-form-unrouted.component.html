@@ -1,62 +1,100 @@
-<div *ngIf="status!=null">
+<div *ngIf="status != null">
   <div class="d-flex justify-content-center my-3">
     <div class="alert alert-danger" role="alert">
-      {{status!.error.message}} - {{status!.message}}
+      {{ status!.error.message }} - {{ status!.message }}
     </div>
   </div>
 </div>
 
-<div *ngIf="status==null">
+<div *ngIf="status == null">
   <div class="col-12">
     <div class="d-flex justify-content-center my-3">
       <form [formGroup]="equipoForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <mat-form-field *ngIf="operation=='EDIT'">
-            <mat-label>ID:</mat-label>
-            <input matInput formControlName="id" placeholder="ID" required readonly>
-            <mat-hint align="end">(can't change this number)</mat-hint>
+          <mat-form-field *ngIf="operation == 'EDIT'">
+            <mat-label>Id:</mat-label>
+            <input
+              matInput
+              formControlName="id"
+              placeholder="ID"
+              required
+              readonly
+            />
+            <mat-hint align="end">(no se puede cambiar este número)</mat-hint>
           </mat-form-field>
         </div>
         <div class="form-group">
-          <mat-form-field [style.width.px]=350>
-            <mat-label>Name:</mat-label>
-            <input matInput formControlName="nombre" placeholder="Name" required>
-            <mat-hint align="end">(1 to 255 characters long)</mat-hint>
-            <mat-error *ngIf="hasError('nombre', 'required')">Name is required</mat-error>
+          <mat-form-field [style.width.px]="350">
+            <mat-label>Nombre:</mat-label>
+            <input
+              matInput
+              formControlName="nombre"
+              placeholder="Name"
+              required
+            />
+            <mat-hint align="end">(1 a 255 carácteres)</mat-hint>
+            <mat-error *ngIf="hasError('nombre', 'required')"
+              >El nombre es requerido</mat-error
+            >
           </mat-form-field>
         </div>
         <div class="form-group">
-          <mat-form-field [style.width.px]=350>
-            <mat-label>Country:</mat-label>
-            <input matInput formControlName="pais_origen" placeholder="Country" required>
-            <mat-hint align="end">(Country of origin)</mat-hint>
-            <mat-error *ngIf="hasError('pais_origen', 'required')">Country is required</mat-error>
+          <mat-form-field [style.width.px]="350">
+            <mat-label>País de origen:</mat-label>
+            <input
+              matInput
+              formControlName="pais_origen"
+              placeholder="País de origen"
+              required
+            />
+            <mat-error *ngIf="hasError('pais_origen', 'required')"
+              >El país es requerido</mat-error
+            >
           </mat-form-field>
         </div>
         <div class="form-group">
-          <mat-form-field [style.width.px]=350>
-            <mat-label>City:</mat-label>
-            <input matInput formControlName="ciudad_origen" placeholder="City">
-            <mat-hint align="end">(City of origin)</mat-hint>
+          <mat-form-field [style.width.px]="350">
+            <mat-label>Ciudad de origen:</mat-label>
+            <input
+              matInput
+              formControlName="ciudad_origen"
+              placeholder="Ciudad de origen"
+            />
           </mat-form-field>
         </div>
         <div class="form-group">
-          <mat-form-field [style.width.px]=350>
-            <mat-label>Foundation Date:</mat-label>
-            <input matInput formControlName="fecha_fundacion" placeholder="Foundation Date" required>
-            <mat-hint align="end">(Date of foundation)</mat-hint>
-            <mat-error *ngIf="hasError('fecha_fundacion', 'required')">Foundation Date is required</mat-error>
+          <mat-form-field [style.width.px]="350">
+            <mat-label>Fecha de fundación:</mat-label>
+            <input
+              matInput
+              formControlName="fecha_fundacion"
+              placeholder="Fecha de fundación"
+              required
+            />
+            <mat-error *ngIf="hasError('fecha_fundacion', 'required')"
+              >La fecha de fundación es requerida</mat-error
+            >
           </mat-form-field>
         </div>
         <div class="form-group">
-          <mat-form-field [style.width.px]=350>
-            <mat-label>Coach:</mat-label>
-            <input matInput formControlName="entrenador" placeholder="Coach">
-            <mat-hint align="end">(Coach's name)</mat-hint>
+          <mat-form-field [style.width.px]="350">
+            <mat-label>Entrenador:</mat-label>
+            <input
+              matInput
+              formControlName="entrenador"
+              placeholder="Entrenador"
+            />
           </mat-form-field>
         </div>
         <div class="text-center mt-5">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!equipoForm.valid">Save Equipo</button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!equipoForm.valid"
+          >
+            Guardar Equipo
+          </button>
         </div>
       </form>
     </div>

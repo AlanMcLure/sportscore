@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'logout', component: LogoutRoutedComponent },
 
   { path: 'admin/jugador/plist', component: AdminJugadorPlistRoutedComponent },
+  { path: 'admin/jugador/plist/byequipo/:id', component: AdminJugadorPlistRoutedComponent },
   { path: 'admin/jugador/view/:id', component: AdminJugadorViewRoutedComponent },
   { path: 'admin/jugador/new', component: AdminJugadorNewRoutedComponent },
   { path: 'admin/jugador/edit/:id', component: AdminJugadorEditRoutedComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
 
   { path: 'admin/partido/new', component: AdminPartidoNewRoutedComponent },
   { path: 'admin/partido/plist', component: AdminPartidoPlistRoutedComponent },
+  { path: 'admin/partido/plist/byequipo/:id', component: AdminPartidoPlistRoutedComponent },
   { path: 'admin/partido/view/:id', component: AdminPartidoViewRoutedComponent },
   { path: 'admin/partido/edit/:id', component: AdminPartidoEditRoutedComponent },
 ];

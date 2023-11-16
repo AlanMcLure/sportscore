@@ -19,6 +19,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 //--
 import { HomeRoutedComponent } from './components/shared/home-routed/home-routed.component';
 import { MenuUnroutedComponent } from './components/shared/menu-unrouted/menu-unrouted.component';
@@ -109,6 +110,7 @@ import { CryptoService } from './service/crypto.service';
     PaginatorModule,
     TableModule,
     ConfirmDialogModule,
+    ConfirmPopupModule,
     //--
     MatButtonModule,
     MatCardModule,
