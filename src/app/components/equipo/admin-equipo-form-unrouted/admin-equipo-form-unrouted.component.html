@@ -43,11 +43,11 @@
             <mat-label>País de origen:</mat-label>
             <input
               matInput
-              formControlName="pais_origen"
+              formControlName="paisOrigen"
               placeholder="País de origen"
               required
             />
-            <mat-error *ngIf="hasError('pais_origen', 'required')"
+            <mat-error *ngIf="hasError('paisOrigen', 'required')"
               >El país es requerido</mat-error
             >
           </mat-form-field>
@@ -57,24 +57,31 @@
             <mat-label>Ciudad de origen:</mat-label>
             <input
               matInput
-              formControlName="ciudad_origen"
+              formControlName="ciudadOrigen"
               placeholder="Ciudad de origen"
             />
           </mat-form-field>
         </div>
-        <div class="form-group">
-          <mat-form-field [style.width.px]="350">
-            <mat-label>Fecha de fundación:</mat-label>
-            <input
-              matInput
-              formControlName="fecha_fundacion"
-              placeholder="Fecha de fundación"
-              required
-            />
-            <mat-error *ngIf="hasError('fecha_fundacion', 'required')"
-              >La fecha de fundación es requerida</mat-error
+        <div class="row mb-3">
+          <label for="fechaFundacion" class="col-sm-2 col-form-label"
+            >Fecha de Fundación:</label
+          >
+          <div class="col-sm-10">
+            <p-calendar
+              formControlName="fechaFundacion"
+              [locale]="es"
+              dateFormat="dd/mm/yy"
+              inputId="spanish"
+              [showIcon]="true"
+              [showTime]="false"
+            ></p-calendar>
+            <div
+              *ngIf="hasError('fechaFundacion', 'required')"
+              class="text-danger"
             >
-          </mat-form-field>
+              Debes establecer una fecha válida.
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <mat-form-field [style.width.px]="350">

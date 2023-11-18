@@ -39,14 +39,14 @@
         <tr>
           <th (click)="doOrder('id')">ID</th>
           <th (click)="doOrder('nombre')">Nombre</th>
-          <th (click)="doOrder('apellido_1')">1er Apellido</th>
-          <th (click)="doOrder('apellido_2')">2ndo Apellido</th>
+          <th (click)="doOrder('apellido1')">1er Apellido</th>
+          <th (click)="doOrder('apellido2')">2ndo Apellido</th>
           <th (click)="doOrder('nacionalidad')">Nacionalidad</th>
           <th (click)="doOrder('posicion')">Posición</th>
-          <th (click)="doOrder('fecha_nacimiento')">Fecha de nacimiennto</th>
+          <th (click)="doOrder('fechaNacimiento')">Fecha de nacimiennto</th>
           <th (click)="doOrder('email')">Email</th>
           <th (click)="doOrder('username')">Username</th>
-          <th (click)="doOrder('rol')">Rol</th>
+          <th (click)="doOrder('role')">Rol</th>
           <th (click)="doOrder('equipo')">Equipo</th>
           <th>Herramientas</th>
         </tr>
@@ -60,16 +60,16 @@
             <strong>{{ jugador.id }}</strong>
           </td>
           <td>{{ jugador.nombre }}</td>
-          <td>{{ jugador.apellido_1 }}</td>
-          <td>{{ jugador.apellido_2 }}</td>
+          <td>{{ jugador.apellido1 }}</td>
+          <td>{{ jugador.apellido2 }}</td>
           <td>{{ jugador.nacionalidad }}</td>
           <td>{{ jugador.posicion }}</td>
-          <td>{{ jugador.fecha_nacimiento }}</td>
+          <td>{{ jugador.fechaNacimiento }}</td>
           <td>{{ jugador.email }}</td>
           <td>{{ jugador.username }}</td>
           <td class="text-center">
-            <span *ngIf="jugador.rol == true">Admin</span>
-            <span *ngIf="jugador.rol == false">User</span>
+            <span *ngIf="jugador.role == true">Admin</span>
+            <span *ngIf="jugador.role == false">User</span>
           </td>
           <td>
             <a
@@ -105,11 +105,7 @@
                 <i class="pi pi-pencil"></i>
               </button>
               <!-- La lógica de las claves ajenas no se si puede afectar aquí -->
-              <button
-                *ngIf="!jugador.equipo.id"
-                class="btn btn-danger"
-                (click)="doRemove(jugador)"
-              >
+              <button class="btn btn-danger" (click)="doRemove(jugador)">
                 <i class="pi pi-trash"></i>
               </button>
             </div>

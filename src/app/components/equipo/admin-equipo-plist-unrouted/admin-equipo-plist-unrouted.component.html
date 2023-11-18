@@ -30,9 +30,9 @@
         <tr>
           <th (click)="doOrder('id')">Id</th>
           <th (click)="doOrder('nombre')">Nombre</th>
-          <th (click)="doOrder('pais_origen')">País de origen</th>
-          <th (click)="doOrder('ciudad_origen')">Ciudad de origen</th>
-          <th (click)="doOrder('fecha_fundacion')">Fecha de fundación</th>
+          <th (click)="doOrder('paisOrigen')">País de origen</th>
+          <th (click)="doOrder('ciudadOrigen')">Ciudad de origen</th>
+          <th (click)="doOrder('fechaFundacion')">Fecha de fundación</th>
           <th (click)="doOrder('entrenador')">Entrenador</th>
           <th>Herramientas</th>
         </tr>
@@ -43,9 +43,9 @@
             <strong>{{ e.id }}</strong>
           </td>
           <td>{{ e.nombre }}</td>
-          <td>{{ e.pais_origen }}</td>
-          <td>{{ e.ciudad_origen }}</td>
-          <td>{{ e.fecha_fundacion }}</td>
+          <td>{{ e.paisOrigen }}</td>
+          <td>{{ e.ciudadOrigen }}</td>
+          <td>{{ e.fechaFundacion }}</td>
           <td>{{ e.entrenador }}</td>
           <td class="text-center">
             <div

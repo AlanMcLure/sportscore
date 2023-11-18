@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { IEquipo, formOperation } from 'src/app/model/model.interfaces';
 import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
+import { CALENDAR_ES } from 'src/environment/environment';
 
 @Component({
   selector: 'app-admin-equipo-form-unrouted',
@@ -16,8 +17,10 @@ export class AdminEquipoFormUnroutedComponent implements OnInit {
   @Input() id: number = 1;
   @Input() operation: formOperation = 'NEW'; // new or edit
 
+  es = CALENDAR_ES;
+
   equipoForm!: FormGroup;
-  oEquipo: IEquipo = {} as IEquipo;
+  oEquipo: IEquipo = { fechaFundacion: new Date(Date.now()) } as IEquipo;
   status: HttpErrorResponse | null = null;
 
   constructor(
@@ -30,12 +33,17 @@ export class AdminEquipoFormUnroutedComponent implements OnInit {
   }
 
   initializeForm(oEquipo: IEquipo) {
+
+    const fechaFundacion = oEquipo.fechaFundacion instanceof Date
+    ? oEquipo.fechaFundacion
+    : new Date(oEquipo.fechaFundacion);
+
     this.equipoForm = this.formBuilder.group({
       id: [oEquipo.id],
       nombre: [oEquipo.nombre, [Validators.required, Validators.minLength(1), Validators.maxLength(255)]],
-      pais_origen: [oEquipo.pais_origen, [Validators.required]],
-      ciudad_origen: [oEquipo.ciudad_origen],
-      fecha_fundacion: [oEquipo.fecha_fundacion, [Validators.required]],
+      paisOrigen: [oEquipo.paisOrigen, [Validators.required]],
+      ciudadOrigen: [oEquipo.ciudadOrigen],
+      fechaFundacion: [new Date(fechaFundacion.setHours(0, 0, 0, 0)), Validators.required],
       entrenador: [oEquipo.entrenador]
     });
   }

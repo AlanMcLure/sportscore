@@ -10,47 +10,8 @@
   <div class="col-12">
     <div class="d-flex justify-content-center my-3">
       <form [formGroup]="partidoForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <mat-form-field>
-            <mat-label>Título:</mat-label>
-            <input
-              matInput
-              formControlName="title"
-              placeholder="Título"
-              required
-            />
-            <mat-hint align="end">(3 a 255 carácteres)</mat-hint>
-            <mat-error *ngIf="hasError('title', 'required')"
-              >El título es requerido</mat-error
-            >
-            <mat-error *ngIf="hasError('title', 'minlength')"
-              >Se requiere más longitud</mat-error
-            >
-            <mat-error *ngIf="hasError('title', 'maxlength')"
-              >Excede el límite</mat-error
-            >
-          </mat-form-field>
-        </div>
-        <div class="form-group">
-          <mat-form-field [style.width.px]="500">
-            <mat-label>Cuerpo:</mat-label>
-            <textarea
-              matInput
-              formControlName="body"
-              placeholder="Cuerpo"
-              required
-            ></textarea>
-            <mat-hint align="end">(Máximo 1000 carácteres)</mat-hint>
-            <mat-error *ngIf="hasError('body', 'required')"
-              >El cuerpo es requerido</mat-error
-            >
-            <mat-error *ngIf="hasError('body', 'maxlength')"
-              >Excede el límite de caracteres</mat-error
-            >
-          </mat-form-field>
-        </div>
         <!-- No se como va a funcionar esto con mismos equipos -->
-        <div formGroupName="equipo_local">
+        <div formGroupName="equipoLocal">
           <div class="form-group">
             <mat-form-field [style.width.px]="100">
               <mat-label>Equipo Local:</mat-label>
@@ -69,10 +30,10 @@
             >
               <i class="pi pi-search"></i> Busca un equipo local
             </button>
-            {{ oPartido.equipo_local.nombre }}
+            {{ oPartido.equipoLocal.nombre }}
           </div>
         </div>
-        <div formGroupName="equipo_visitante">
+        <div formGroupName="equipoVisitante">
           <div class="form-group">
             <mat-form-field [style.width.px]="100">
               <mat-label>Equipo Visitante:</mat-label>
@@ -91,10 +52,44 @@
             >
               <i class="pi pi-search"></i> Busca un equipo visitante
             </button>
-            {{ oPartido.equipo_visitante.nombre }}
+            {{ oPartido.equipoVisitante.nombre }}
           </div>
         </div>
-
+        <div class="row mb-3">
+          <label for="fechaPartido" class="col-sm-2 col-form-label"
+            >Fecha del partido:</label
+          >
+          <div class="col-sm-10">
+            <p-calendar
+              formControlName="fechaPartido"
+              [locale]="es"
+              dateFormat="dd/mm/yy"
+              inputId="spanish"
+              [showIcon]="true"
+              [showTime]="false"
+            ></p-calendar>
+            <div
+              *ngIf="hasError('fechaPartido', 'required')"
+              class="text-danger"
+            >
+              Debes establecer una fecha válida.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <mat-form-field [style.width.px]="350">
+            <mat-label>Resultado:</mat-label>
+            <input
+              matInput
+              formControlName="resultado"
+              placeholder="Resultado"
+            />
+            <mat-hint align="end">(máx. 255 carácteres)</mat-hint>
+            <mat-error *ngIf="hasError('resultado', 'maxlength')"
+              >Límite excedido</mat-error
+            >
+          </mat-form-field>
+        </div>
         <div class="text-center mt-5">
           <button
             mat-raised-button

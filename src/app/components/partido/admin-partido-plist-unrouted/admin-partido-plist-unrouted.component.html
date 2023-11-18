@@ -39,9 +39,9 @@
       <thead>
         <tr>
           <th (click)="doOrder('id')">ID</th>
-          <th (click)="doOrder('equipo_local')">Equipo local</th>
-          <th (click)="doOrder('equipo_visitante')">Equipo visitante</th>
-          <th (click)="doOrder('fecha_partido')">Fecha partido</th>
+          <th (click)="doOrder('equipoLocal')">Equipo local</th>
+          <th (click)="doOrder('equipoVisitante')">Equipo visitante</th>
+          <th (click)="doOrder('fechaPartido')">Fecha partido</th>
           <th (click)="doOrder('resultado')">Resultado</th>
           <th>Herramientas</th>
         </tr>
@@ -58,14 +58,13 @@
                 'equipo',
                 'plist',
                 'byequipo',
-                p.equipo_local.id
+                p.equipoLocal.id
               ]"
             >
-              ({{ p.equipo_local.id }})
-              {{ p.equipo_local.nombre | trimming : 25 }}</a
+              ({{ p.equipoLocal.id }})
+              {{ p.equipoLocal.nombre | trimming : 25 }}</a
             >
           </td>
-          <td>{{ p.equipo_visitante.nombre | trimming : 25 }}</td>
           <td>
             <a
               [routerLink]="[
@@ -73,15 +72,14 @@
                 'equipo',
                 'plist',
                 'byequipo',
-                p.equipo_visitante.id
+                p.equipoVisitante.id
               ]"
             >
-              ({{ p.equipo_visitante.id }})
-              {{ p.equipo_visitante.nombre | trimming : 25 }}</a
+              ({{ p.equipoVisitante.id }})
+              {{ p.equipoVisitante.nombre | trimming : 25 }}</a
             >
           </td>
-          <td>{{ p.equipo_visitante.nombre | trimming : 50 }}</td>
-          <td>{{ p.fecha_partido }}</td>
+          <td>{{ p.fechaPartido }}</td>
           <td>{{ p.resultado }}</td>
           <td class="text-center">
             <div

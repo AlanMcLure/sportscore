@@ -13,7 +13,7 @@ export class AdminPartidoDetailUnroutedComponent implements OnInit {
   
   @Input() id: number = 1;
   
-  oPartido: IPartido = { equipo_local: {}, equipo_visitante: {} } as IPartido;
+  oPartido: IPartido = { equipoLocal: {}, equipoVisitante: {} } as IPartido;
   status: HttpErrorResponse | null = null;
 
   constructor(

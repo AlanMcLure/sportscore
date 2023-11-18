@@ -1,38 +1,53 @@
-<div *ngIf="status!=null">
-    <div class="d-flex justify-content-center my-3">
-        <div class="alert alert-danger" role="alert">
-            {{status!.error.message}} - {{status!.message}}
-        </div>
+<div *ngIf="status != null">
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{ status!.error.message }} - {{ status!.message }}
     </div>
+  </div>
 </div>
 
-<div *ngIf="status==null">
-    <table class="table table-striped table-hover">
-        <tbody>
-            <tr>
-                <th>Propiedad</th>
-                <th>Valor</th>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{oPartido.id}}</td>
-            </tr>
-            <tr>
-                <th>Equipo local</th>
-                <td> <a [routerLink]="['/admin','equipo','view',oPartido.equipo_local.id]">{{oPartido.equipo_local.nombre}}</a></td>
-            </tr>
-            <tr>
-                <th>Equipo visitante</th>
-                <td> <a [routerLink]="['/admin','equipo','view',oPartido.equipo_visitante.id]">{{oPartido.equipo_visitante.nombre}}</a></td>
-            </tr>
-            <tr>
-                <th>Fecha partido</th>
-                <td>{{oPartido.fecha_partido | date:'short'}}</td>
-            </tr>
-            <tr>
-                <th>resultado</th>
-                <td>{{oPartido.resultado}}</td>
-            </tr>
-        </tbody>
-    </table>
+<div *ngIf="status == null">
+  <table class="table table-striped table-hover">
+    <tbody>
+      <tr>
+        <th>Propiedad</th>
+        <th>Valor</th>
+      </tr>
+      <tr>
+        <th>Id</th>
+        <td>{{ oPartido.id }}</td>
+      </tr>
+      <tr>
+        <th>Equipo local</th>
+        <td>
+          <a
+            [routerLink]="['/admin', 'equipo', 'view', oPartido.equipoLocal.id]"
+            >{{ oPartido.equipoLocal.nombre }}</a
+          >
+        </td>
+      </tr>
+      <tr>
+        <th>Equipo visitante</th>
+        <td>
+          <a
+            [routerLink]="[
+              '/admin',
+              'equipo',
+              'view',
+              oPartido.equipoVisitante.id
+            ]"
+            >{{ oPartido.equipoVisitante.nombre }}</a
+          >
+        </td>
+      </tr>
+      <tr>
+        <th>Fecha partido</th>
+        <td>{{ oPartido.fechaPartido | date : "shortDate" }}</td>
+      </tr>
+      <tr>
+        <th>resultado</th>
+        <td>{{ oPartido.resultado }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -7,6 +7,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IJugador, IEquipo, formOperation } from 'src/app/model/model.interfaces';
 import { JugadorAjaxService } from 'src/app/service/jugador.ajax.service.service';
 import { AdminEquipoSelectionUnroutedComponent } from '../../equipo/admin-equipo-selection-unrouted/admin-equipo-selection-unrouted.component';
+import { CALENDAR_ES } from 'src/environment/environment';
 
 @Component({
   selector: 'app-admin-jugador-form-unrouted',
@@ -18,8 +19,10 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
   @Input() id: number = 1;
   @Input() operation: formOperation = 'NEW';
 
+  es = CALENDAR_ES;
+
   jugadorForm!: FormGroup;
-  oJugador: IJugador = { equipo: {} } as IJugador;
+  oJugador: IJugador = { fechaNacimiento: new Date(Date.now()), equipo: {} } as IJugador;
   status: HttpErrorResponse | null = null;
 
   oDynamicDialogRef: DynamicDialogRef | undefined;
@@ -35,18 +38,23 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
   }
 
   initializeForm(oJugador: IJugador) {
+
+    const fechaNacimiento = oJugador.fechaNacimiento instanceof Date
+    ? oJugador.fechaNacimiento
+    : new Date(oJugador.fechaNacimiento);
+
     this.jugadorForm = this.oFormBuilder.group({
       id: [oJugador.id],
       nombre: [oJugador.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-      apellido_1: [oJugador.apellido_1, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-      apellido_2: [oJugador.apellido_2, Validators.maxLength(255)],
+      apellido1: [oJugador.apellido1, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      apellido2: [oJugador.apellido2, Validators.maxLength(255)],
       nacionalidad: [oJugador.nacionalidad],
       posicion: [oJugador.posicion],
-      fecha_nacimiento: [oJugador.fecha_nacimiento, Validators.required],
+      fechaNacimiento: [new Date(fechaNacimiento.setHours(0, 0, 0, 0)), Validators.required],
       email: [oJugador.email, [Validators.required, Validators.email]],
       username: [oJugador.username, [Validators.required, Validators.minLength(6), Validators.maxLength(15), Validators.pattern('^[a-zA-Z0-9]+$')]],
       password: [oJugador.password],
-      rol: [oJugador.rol, Validators.required],
+      role: [oJugador.role, Validators.required],
       equipo: this.oFormBuilder.group({
         id: [oJugador.equipo.id, Validators.required]
       })
@@ -57,6 +65,7 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
     if (this.operation == 'EDIT') {
       this.oJugadorAjaxService.getOne(this.id).subscribe({
         next: (data: IJugador) => {
+          console.log('Datos del jugador en modo de edición:', data);
           this.oJugador = data;
           this.initializeForm(this.oJugador);
         },
@@ -64,11 +73,12 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
           this.status = error;
           this.oMatSnackBar.open("Error reading user from server.", '', { duration: 2000 });
         }
-      })
+      });
     } else {
       this.initializeForm(this.oJugador);
     }
   }
+  
 
   public hasError = (controlName: string, errorName: string) => {
     return this.jugadorForm.controls[controlName].hasError(errorName);
@@ -93,6 +103,7 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
         this.oJugadorAjaxService.updateOne(this.jugadorForm.value).subscribe({
           next: (data: IJugador) => {
             this.oJugador = data;
+            console.log(this.jugadorForm.value);
             this.initializeForm(this.oJugador);
             this.oMatSnackBar.open("El jugador ha sido actualizado.", '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'jugador', 'view', this.oJugador.id]);

@@ -40,15 +40,15 @@ export interface IEntity {
 
 export interface IJugador extends IEntity {
     nombre: string;
-    apellido_1: string;
-    apellido_2: string;
+    apellido1: string;
+    apellido2: string;
     nacionalidad: string;
     posicion: string;
-    fecha_nacimiento: Date;
+    fechaNacimiento: Date;
     email: string;
     username: string;
     password: string;
-    rol: boolean;
+    role: boolean;
     equipo: IEquipo;
 }
 
@@ -57,9 +57,9 @@ export interface IJugadorPage extends IPage<IJugador> {
 
 export interface IEquipo extends IEntity {
     nombre: string;
-    pais_origen: string;
-    ciudad_origen: string;
-    fecha_fundacion: Date;
+    paisOrigen: string;
+    ciudadOrigen: string;
+    fechaFundacion: Date;
     entrenador: string;
 }
 
@@ -67,9 +67,9 @@ export interface IEquipoPage extends IPage<IEquipo> {
 }
 
 export interface IPartido extends IEntity {
-    equipo_local: IEquipo;
-    equipo_visitante: IEquipo;
-    fecha_partido: Date;
+    equipoLocal: IEquipo;
+    equipoVisitante: IEquipo;
+    fechaPartido: Date;
     resultado: string;
 }
 

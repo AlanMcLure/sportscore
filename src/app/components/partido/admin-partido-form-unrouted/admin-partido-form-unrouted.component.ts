@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IPartido, IEquipo, formOperation } from 'src/app/model/model.interfaces';
 import { PartidoAjaxService } from 'src/app/service/partido.ajax.service.service';
-import { AdminEquipoSelectionUnroutedComponent } from '../../equipo/admin-equipo-selection-unrouted/admin-equipo-selection-unrouted.component'; // Asegúrate de importar el componente correcto
+import { AdminEquipoSelectionUnroutedComponent } from '../../equipo/admin-equipo-selection-unrouted/admin-equipo-selection-unrouted.component';
+import { CALENDAR_ES } from 'src/environment/environment';
 
 @Component({
   selector: 'app-admin-partido-form-unrouted',
@@ -19,8 +20,10 @@ export class AdminPartidoFormUnroutedComponent implements OnInit {
   @Input() id: number = 1;
   @Input() operation: formOperation = 'NEW'; // new or edit
 
+  es = CALENDAR_ES;
+
   partidoForm!: FormGroup;
-  oPartido: IPartido = { equipo_local: {}, equipo_visitante: {} } as IPartido;
+  oPartido: IPartido = { fechaPartido: new Date(Date.now()), equipoLocal: {}, equipoVisitante: {} } as IPartido;
   status: HttpErrorResponse | null = null;
 
   oDynamicDialogRef: DynamicDialogRef | undefined;
@@ -36,15 +39,20 @@ export class AdminPartidoFormUnroutedComponent implements OnInit {
   }
 
   initializeForm(oPartido: IPartido) {
+    
+    const fechaPartido = oPartido.fechaPartido instanceof Date
+    ? oPartido.fechaPartido
+    : new Date(oPartido.fechaPartido);
+    
     this.partidoForm = this.formBuilder.group({
       id: [oPartido.id],
-      equipo_local: this.formBuilder.group({
-        id: [oPartido.equipo_local.id, Validators.required]
+      equipoLocal: this.formBuilder.group({
+        id: [oPartido.equipoLocal.id, Validators.required]
       }),
-      equipo_visitante: this.formBuilder.group({
-        id: [oPartido.equipo_visitante.id, Validators.required]
+      equipoVisitante: this.formBuilder.group({
+        id: [oPartido.equipoVisitante.id, Validators.required]
       }),
-      fecha_partido: [oPartido.fecha_partido, Validators.required],
+      fechaPartido: [new Date(fechaPartido.setHours(0, 0, 0, 0)), Validators.required],
       resultado: [oPartido.resultado, Validators.required]
     });
   }
@@ -75,7 +83,7 @@ export class AdminPartidoFormUnroutedComponent implements OnInit {
       if (this.operation == 'NEW') {
         this.partidoAjaxService.newOne(this.partidoForm.value).subscribe({
           next: (data: IPartido) => {
-            this.oPartido = { "equipo_local": {}, "equipo_visitante": {} } as IPartido;
+            this.oPartido = { "equipoLocal": {}, "equipoVisitante": {} } as IPartido;
             this.initializeForm(this.oPartido);
             this.matSnackBar.open("El partido ha sido creado.", '', { duration: 2000 });
             this.router.navigate(['/admin', 'partido', 'view', data]);
@@ -114,12 +122,12 @@ export class AdminPartidoFormUnroutedComponent implements OnInit {
     this.oDynamicDialogRef.onClose.subscribe((oEquipo: IEquipo) => {
       if (oEquipo) {
         // Verifica si el equipo ya ha sido seleccionado como equipo visitante
-        if (this.oPartido.equipo_visitante && this.oPartido.equipo_visitante.id === oEquipo.id) {
+        if (this.oPartido.equipoVisitante && this.oPartido.equipoVisitante.id === oEquipo.id) {
           // Equipo ya seleccionado como visitante, muestra un mensaje o realiza la lógica necesaria
           console.error('Este equipo ya ha sido seleccionado como equipo visitante.');
         } else {
-          this.oPartido.equipo_local = oEquipo;
-          this.partidoForm.controls['equipo_local'].patchValue({ id: oEquipo.id });
+          this.oPartido.equipoLocal = oEquipo;
+          this.partidoForm.controls['equipoLocal'].patchValue({ id: oEquipo.id });
         }
       }
     });
@@ -137,12 +145,12 @@ export class AdminPartidoFormUnroutedComponent implements OnInit {
     this.oDynamicDialogRef.onClose.subscribe((oEquipo: IEquipo) => {
       if (oEquipo) {
         // Verifica si el equipo ya ha sido seleccionado como equipo local
-        if (this.oPartido.equipo_local && this.oPartido.equipo_local.id === oEquipo.id) {
+        if (this.oPartido.equipoLocal && this.oPartido.equipoLocal.id === oEquipo.id) {
           // Equipo ya seleccionado como local, muestra un mensaje o realiza la lógica necesaria
           console.error('Este equipo ya ha sido seleccionado como equipo local.');
         } else {
-          this.oPartido.equipo_visitante = oEquipo;
-          this.partidoForm.controls['equipo_visitante'].patchValue({ id: oEquipo.id });
+          this.oPartido.equipoVisitante = oEquipo;
+          this.partidoForm.controls['equipoVisitante'].patchValue({ id: oEquipo.id });
         }
       }
     });
