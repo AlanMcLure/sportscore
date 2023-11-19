@@ -11,6 +11,7 @@ import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
 import { Subject } from 'rxjs';
 
 @Component({
+  providers: [ConfirmationService],
   selector: 'app-admin-partido-plist-unrouted',
   templateUrl: './admin-partido-plist-unrouted.component.html',
   styleUrls: ['./admin-partido-plist-unrouted.component.css']
@@ -19,7 +20,7 @@ import { Subject } from 'rxjs';
 export class AdminPartidoPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
-  @Input() equipo_id: number = 0; //No se si hacerlo por equipo solo o por local y visitante
+  @Input() equipoId: number = 0; //No se si hacerlo por equipo solo o por local y visitante
 
   oPage: IPartidoPage | undefined;
   oEquipo: IEquipo | null = null;
@@ -39,7 +40,7 @@ export class AdminPartidoPlistUnroutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
-    if (this.equipo_id > 0) {
+    if (this.equipoId > 0) {
       this.getEquipo();
     }
     this.forceReload.subscribe({
@@ -52,7 +53,7 @@ export class AdminPartidoPlistUnroutedComponent implements OnInit {
   }
 
   getPage(): void {
-    this.oPartidoAjaxService.getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.equipo_id).subscribe({
+    this.oPartidoAjaxService.getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.equipoId).subscribe({
       next: (data: IPartidoPage) => {
         this.oPage = data;
         this.oPaginatorState.pageCount = data.totalPages;
@@ -117,7 +118,7 @@ export class AdminPartidoPlistUnroutedComponent implements OnInit {
   }
 
   getEquipo(): void {
-    this.oEquipoAjaxService.getOne(this.equipo_id).subscribe({
+    this.oEquipoAjaxService.getOne(this.equipoId).subscribe({
       next: (data: IEquipo) => {
         this.oEquipo = data;
       },

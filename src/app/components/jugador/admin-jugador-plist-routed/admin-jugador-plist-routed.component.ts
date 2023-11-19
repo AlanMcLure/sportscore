@@ -7,6 +7,7 @@ import { JugadorAjaxService } from 'src/app/service/jugador.ajax.service.service
 import { Subject } from 'rxjs';
 
 @Component({
+  providers: [ConfirmationService],
   selector: 'app-admin-jugador-plist-routed',
   templateUrl: './admin-jugador-plist-routed.component.html',
   styleUrls: ['./admin-jugador-plist-routed.component.css']
@@ -14,7 +15,7 @@ import { Subject } from 'rxjs';
 export class AdminJugadorPlistRoutedComponent implements OnInit {
 
   forceReload: Subject<boolean> = new Subject<boolean>();
-  equipo_id: number;
+  equipoId: number;
   bLoading: boolean = false;
 
   constructor(
@@ -24,7 +25,7 @@ export class AdminJugadorPlistRoutedComponent implements OnInit {
     private oMatSnackBar: MatSnackBar
   ) {
     // El id ese no se si habrá que cambiarlo
-    this.equipo_id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") ?? "0");
+    this.equipoId = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") ?? "0");
   }
 
   ngOnInit() { }

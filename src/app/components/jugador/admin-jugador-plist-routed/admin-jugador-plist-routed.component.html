@@ -23,13 +23,14 @@
         <a class="btn btn-warning mx-1" (click)="doGenerateRandom(1000)"
           >+1000</a
         >
+        <a class="btn btn-danger mx-1" (click)="doEmpty($event)">Vaciar</a>
       </div>
     </div>
     <app-admin-jugador-plist-unrouted
-      [equipo_id]="equipo_id"
+      [equipoId]="equipoId"
       *ngIf="!bLoading"
     ></app-admin-jugador-plist-unrouted>
   </div>
 </div>
 
-<!-- <p-confirmPopup></p-confirmPopup> -->
+<p-confirmPopup></p-confirmPopup>

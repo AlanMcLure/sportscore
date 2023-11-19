@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IEquipo } from 'src/app/model/model.interfaces';
 
 
-
-
 @Component({
   selector: 'app-home-routed',
   templateUrl: './home-routed.component.html',
@@ -12,7 +10,7 @@ import { IEquipo } from 'src/app/model/model.interfaces';
 
 export class HomeRoutedComponent implements OnInit {
 
-  equipo_id: number = 17;
+  equipoId: number = 17;
   
 
   constructor(
@@ -23,7 +21,7 @@ export class HomeRoutedComponent implements OnInit {
   }
 
   onEquipoChange(oEquipo: IEquipo) {
-    this.equipo_id = oEquipo.id;
+    this.equipoId = oEquipo.id;
   }
 
 }

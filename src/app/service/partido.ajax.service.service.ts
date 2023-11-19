@@ -18,15 +18,15 @@ export class PartidoAjaxService {
     }
 
     // No se si aqui puede afectar la logica de las urls (ver si se filtraria por equipo, o por local y visitante)
-    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, equipo_id: number): Observable<IPartidoPage> {
+    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, equipoId: number): Observable<IPartidoPage> {
         
         if (!size) size = 10;
         if (!page) page = 0;
 
         let strUrlParams = `?size=${size}&page=${page}&sort=${orderField},${orderDirection}`;
 
-        if (equipo_id !== undefined && equipo_id > 0) {
-            strUrlParams += `&equipo_id=${equipo_id}`;
+        if (equipoId !== undefined && equipoId > 0) {
+            strUrlParams += `&equipo=${equipoId}`;
         }
 
         return this.oHttpClient.get<IPartidoPage>(this.sUrl + strUrlParams);

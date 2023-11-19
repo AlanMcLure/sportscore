@@ -17,14 +17,18 @@ export class JugadorAjaxService {
         return this.oHttpClient.get<IJugador>(this.sUrl + "/" + id);
     }
 
-    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, equipo_id: number | undefined): Observable<IJugadorPage> {
+    getByUsername(username: string): Observable<IJugador> {
+        return this.oHttpClient.get<IJugador>(this.sUrl + "/byUsername/" + username);
+    }
+
+    getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, equipoId: number | undefined): Observable<IJugadorPage> {
         if (!size) size = 10;
         if (!page) page = 0;
     
         let strUrlParams = `?size=${size}&page=${page}&sort=${orderField},${orderDirection}`;
     
-        if (equipo_id !== undefined && equipo_id > 0) {
-            strUrlParams += `&equipo_id=${equipo_id}`;
+        if (equipoId !== undefined && equipoId > 0) {
+            strUrlParams += `&equipo=${equipoId}`;
         }
     
         return this.oHttpClient.get<IJugadorPage>(this.sUrl + strUrlParams);

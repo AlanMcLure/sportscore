@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { PartidoAjaxService } from 'src/app/service/partido.ajax.service.service';
 import { Subject } from 'rxjs';
@@ -14,17 +14,18 @@ import { Subject } from 'rxjs';
 export class AdminPartidoPlistRoutedComponent implements OnInit {
 
   forceReload: Subject<boolean> = new Subject<boolean>();
-  equipo_id: number;
+  equipoId: number;
   bLoading: boolean = false;
 
   constructor(
     private oActivatedRoute: ActivatedRoute,
+    private oRouter: Router,
     private oPartidoAjaxService: PartidoAjaxService,
     private oConfirmationService: ConfirmationService,
     private oMatSnackBar: MatSnackBar
   ) {
     // No se si puede haber problemas aquí
-    this.equipo_id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("equipo_id") ?? "0");
+    this.equipoId = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") ?? "0");
   }
 
   ngOnInit() { }

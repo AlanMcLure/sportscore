@@ -6,6 +6,7 @@ import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
 import { Subject } from 'rxjs';
 
 @Component({
+  providers: [ConfirmationService],
   selector: 'app-admin-equipo-plist-routed',
   templateUrl: './admin-equipo-plist-routed.component.html',
   styleUrls: ['./admin-equipo-plist-routed.component.css']

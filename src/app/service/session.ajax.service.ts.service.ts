@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { API_URL } from 'src/environment/environment';
-import { IToken, SessionEvent } from '../model/model.interfaces';
-
+import { IToken, IJugador, SessionEvent } from '../model/model.interfaces';
+import { JugadorAjaxService } from './jugador.ajax.service.service';
 
 
 @Injectable()
@@ -14,7 +14,8 @@ export class SessionAjaxService {
     subjectSession = new Subject<SessionEvent>();
 
     constructor(
-        private oHttpClient: HttpClient
+        private oHttpClient: HttpClient,
+        private oJugadorAjaxService: JugadorAjaxService
     ) { }
 
     private parseJwt(token: string): IToken {
@@ -70,5 +71,12 @@ export class SessionAjaxService {
         this.subjectSession.next(event);
     }
 
+    getSessionUser(): Observable<IJugador> | null {
+        if (this.isSessionActive()) {
+            return this.oJugadorAjaxService.getByUsername(this.getUsername())
+        } else {
+            return null;
+        }
+    }
 
 }

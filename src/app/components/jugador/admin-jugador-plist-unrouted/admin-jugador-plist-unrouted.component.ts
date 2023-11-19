@@ -8,8 +8,10 @@ import { AdminJugadorDetailUnroutedComponent } from '../admin-jugador-detail-unr
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JugadorAjaxService } from 'src/app/service/jugador.ajax.service.service';
 import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
+import { Subject } from 'rxjs';
 
 @Component({
+  providers: [ConfirmationService],
   selector: 'app-admin-jugador-plist-unrouted',
   templateUrl: './admin-jugador-plist-unrouted.component.html',
   styleUrls: ['./admin-jugador-plist-unrouted.component.css']
@@ -17,7 +19,8 @@ import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
 
 export class AdminJugadorPlistUnroutedComponent implements OnInit {
 
-  @Input() equipo_id: number = 0;
+  @Input() equipoId: number = 0;
+  @Input() forceReload: Subject<boolean> = new Subject<boolean>();
 
   oPage: IJugadorPage | undefined;
   oEquipo: IEquipo | null = null;
@@ -38,9 +41,16 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
-    if (this.equipo_id > 0) {
+    if (this.equipoId > 0) {
       this.getEquipo();
     }
+    this.forceReload.subscribe({
+      next: (v) => {
+        if (v) {
+          this.getPage();
+        }
+      }
+    });
   }
 
   getPage(): void {
@@ -50,7 +60,7 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
         this.oPaginatorState.page,
         this.orderField,
         this.orderDirection,
-        this.equipo_id
+        this.equipoId
       )
       .subscribe({
         next: (data: IJugadorPage) => {
@@ -96,16 +106,20 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
     this.oJugadorToRemove = j;
     this.oCconfirmationService.confirm({
       accept: () => {
-        this.oMatSnackBar.open("El jugador ha sido borrado.", "", { duration: 2000 });
-        this.oJugadorAjaxService.removeOne(this.oJugadorToRemove?.id).subscribe({
-          next: () => {
-            this.getPage();
-          },
-          error: (error: HttpErrorResponse) => {
-            this.status = error;
-            this.oMatSnackBar.open("El jugador no ha sido borrado.", "", { duration: 2000 });
-          }
-        });
+        if (this.oJugadorToRemove) {
+          this.oMatSnackBar.open("El jugador ha sido borrado.", "", { duration: 2000 });
+          this.oJugadorAjaxService.removeOne(this.oJugadorToRemove?.id).subscribe({
+            next: () => {
+              this.getPage();
+            },
+            error: (error: HttpErrorResponse) => {
+              this.status = error;
+              this.oMatSnackBar.open("El jugador no ha sido borrado.", "", { duration: 2000 });
+            }
+          });
+        } else {
+          this.oMatSnackBar.open("El jugador no ha sido seleccionado para ser borrado.", "", { duration: 2000 });
+        }
       },
       reject: (type: ConfirmEventType) => {
         this.oMatSnackBar.open("El jugador no ha sido borrado.", "", { duration: 2000 });
@@ -114,7 +128,7 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
   }
 
   getEquipo(): void {
-    this.oEquipoAjaxService.getOne(this.equipo_id).subscribe({
+    this.oEquipoAjaxService.getOne(this.equipoId).subscribe({
       next: (data: IEquipo) => {
         this.oEquipo = data;
       },

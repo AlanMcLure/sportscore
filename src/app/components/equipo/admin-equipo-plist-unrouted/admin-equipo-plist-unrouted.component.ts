@@ -10,6 +10,7 @@ import { EquipoAjaxService } from 'src/app/service/equipo.ajax.service.service';
 import { Subject } from 'rxjs';
 
 @Component({
+  providers: [ConfirmationService],
   selector: 'app-admin-equipo-plist-unrouted',
   templateUrl: './admin-equipo-plist-unrouted.component.html',
   styleUrls: ['./admin-equipo-plist-unrouted.component.css']

@@ -8,12 +8,12 @@
 
 <div *ngIf="status == null">
   <div class="d-flex justify-content-between mb-3">
-    <h3 *ngIf="equipo_id > 0">
-      Filtrado por equipo ({{ equipo_id }} - {{ oEquipo?.nombre }})<a
+    <h3 *ngIf="equipoId > 0">
+      Filtrado por equipo ({{ equipoId }} - {{ oEquipo?.nombre }})<a
         type="button"
         class="btn btn-danger btn-sm"
-        *ngIf="equipo_id > 0"
-        [routerLink]="['/admin', 'equipo', 'plist']"
+        *ngIf="equipoId > 0"
+        [routerLink]="['/admin', 'jugador', 'plist']"
         >resetear filtro</a
       >
     </h3>
@@ -75,7 +75,7 @@
             <a
               [routerLink]="[
                 '/admin',
-                'equipo',
+                'jugador',
                 'plist',
                 'byequipo',
                 jugador.equipo.id
