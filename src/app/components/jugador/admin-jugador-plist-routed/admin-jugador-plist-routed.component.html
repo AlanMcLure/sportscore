@@ -27,6 +27,7 @@
       </div>
     </div>
     <app-admin-jugador-plist-unrouted
+      [forceReload]="forceReload"
       [equipoId]="equipoId"
       *ngIf="!bLoading"
     ></app-admin-jugador-plist-unrouted>

@@ -25,6 +25,7 @@
       </div>
     </div>
     <app-admin-partido-plist-unrouted
+      [forceReload]="forceReload"
       [equipoId]="equipoId"
       *ngIf="!bLoading"
     ></app-admin-partido-plist-unrouted>
