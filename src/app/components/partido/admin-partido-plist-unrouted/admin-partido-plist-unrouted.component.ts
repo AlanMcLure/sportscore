@@ -20,7 +20,8 @@ import { Subject } from 'rxjs';
 export class AdminPartidoPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
-  @Input() equipoId: number = 0; //No se si hacerlo por equipo solo o por local y visitante
+  @Input() equipoId: number = 0;
+  @Input() hasEquipos: boolean = false;
 
   oPage: IPartidoPage | undefined;
   oEquipo: IEquipo | null = null;

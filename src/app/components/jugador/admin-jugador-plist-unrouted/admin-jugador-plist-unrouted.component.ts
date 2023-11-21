@@ -20,6 +20,7 @@ import { Subject } from 'rxjs';
 export class AdminJugadorPlistUnroutedComponent implements OnInit {
 
   @Input() equipoId: number = 0;
+  @Input() hasEquipos: boolean = false;
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
 
   oPage: IJugadorPage | undefined;
@@ -41,7 +42,7 @@ export class AdminJugadorPlistUnroutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
-    if (this.equipoId > 0) {
+    if (this.equipoId > 0 && this.hasEquipos) {
       this.getEquipo();
     }
     this.forceReload.subscribe({

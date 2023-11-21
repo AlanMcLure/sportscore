@@ -32,44 +32,43 @@ export class AdminJugadorPlistRoutedComponent implements OnInit {
     this.checkIfEquiposExist();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.checkIfEquiposExist();
+  }
 
   private checkIfEquiposExist() {
     // Lógica para verificar si hay equipos
     this.oEquipoAjaxService.getAll().subscribe({
       next: (equipos) => {
-        console.log('Equipos:', equipos);
-        this.hasEquipos = equipos.length > 0;
+        if (Array.isArray(equipos.content)) {
+          this.hasEquipos = equipos.content.length > 0;
+        } else {
+          console.error('La propiedad content de la respuesta de la API no es un arreglo.');
+        }
       },
       error: (error) => {
         console.error('Error al obtener equipos:', error);
+        this.hasEquipos = false;
       }
     });
   }
 
   doGenerateRandom(amount: number) {
-    this.oEquipoAjaxService.getAll().subscribe({
-      next: (equipos) => {
-        if (equipos.length > 0) {
-          this.bLoading = true;    
-          this.oJugadorAjaxService.generateRandom(amount).subscribe({
-            next: (oResponse: number) => {
-              this.oMatSnackBar.open("Ahora hay " + oResponse + " jugadores", '', { duration: 2000 });
-              this.bLoading = false;
-            },
-            error: (oError: HttpErrorResponse) => {
-              this.oMatSnackBar.open("Error al generar los jugadores: " + oError.message, '', { duration: 2000 });
-              this.bLoading = false;
-            },
-          });
-        } else {
-          this.oMatSnackBar.open('Crea equipos primero', 'Cerrar', { duration: 3000 });
-        }
-      },
-      error: (error) => {
-        console.error("Error al obtener equipos:", error);
-      }
-    });
+    if (this.hasEquipos) {
+      this.bLoading = true;    
+      this.oJugadorAjaxService.generateRandom(amount).subscribe({
+        next: (oResponse: number) => {
+          this.oMatSnackBar.open("Ahora hay " + oResponse + " jugadores", '', { duration: 2000 });
+          this.bLoading = false;
+        },
+        error: (oError: HttpErrorResponse) => {
+          this.oMatSnackBar.open("Error al generar los jugadores: " + oError.message, '', { duration: 2000 });
+          this.bLoading = false;
+        },
+      });
+    } else {
+      this.oMatSnackBar.open('Crea equipos primero', 'Cerrar', { duration: 3000 });
+    }
   }
 
   doEmpty($event: Event) {

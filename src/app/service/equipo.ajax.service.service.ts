@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IEquipo, IEquipoPage } from '../model/model.interfaces';
 import { API_URL } from 'src/environment/environment';
 
@@ -17,9 +17,8 @@ export class EquipoAjaxService {
         return this.oHttpClient.get<IEquipo>(this.sUrl + "/" + id);
     }
 
-    getAll(): Observable<IEquipo[]> {
-        console.log('Haciendo solicitud a getAll en EquipoAjaxService');
-        return this.oHttpClient.get<IEquipo[]>(this.sUrl);
+    getAll(): Observable<IEquipoPage> {
+        return this.oHttpClient.get<IEquipoPage>(this.sUrl);
     }
 
     getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string): Observable<IEquipoPage> {
