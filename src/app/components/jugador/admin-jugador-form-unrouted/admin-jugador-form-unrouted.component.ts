@@ -56,7 +56,7 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
       password: [oJugador.password],
       role: [oJugador.role, Validators.required],
       equipo: this.oFormBuilder.group({
-        id: [oJugador.equipo.id, Validators.required]
+        id: [oJugador.equipo ? oJugador.equipo.id : null, Validators.required]
       })
     });
   }
@@ -126,7 +126,7 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
       maximizable: true
     });
 
-    this.oDynamicDialogRef.onClose.subscribe((oEquipo: IEquipo) => {
+    this.oDynamicDialogRef.onClose.subscribe((oEquipo: IEquipo | null) => {
       if (oEquipo) {
         this.oJugador.equipo = oEquipo;
         this.jugadorForm.controls['equipo'].patchValue({ id: oEquipo.id })

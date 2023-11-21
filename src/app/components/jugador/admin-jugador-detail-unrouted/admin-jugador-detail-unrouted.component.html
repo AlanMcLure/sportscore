@@ -11,8 +11,8 @@
     <table class="table table-striped table-hover">
       <tbody>
         <tr>
-          <th>Property</th>
-          <th>Value</th>
+          <th>Propiedad</th>
+          <th>Valor</th>
         </tr>
         <tr>
           <th>id</th>
@@ -65,9 +65,9 @@
           <th>Equipo</th>
           <td>
             {{
-              oJugador !== null && oJugador !== undefined
-                ? oJugador.equipo?.nombre
-                : ""
+              oJugador && oJugador.equipo
+                ? oJugador.equipo.nombre || "Sin equipo"
+                : "Sin equipo"
             }}
           </td>
         </tr>

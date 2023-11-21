@@ -38,6 +38,13 @@ export class AdminEquipoPlistUnroutedComponent implements OnInit {
 
   ngOnInit() {
     this.getPage();
+    this.forceReload.subscribe({
+      next: (v) => {
+        if (v) {
+          this.getPage();
+        }
+      }
+    });
   }
 
   getPage(): void {

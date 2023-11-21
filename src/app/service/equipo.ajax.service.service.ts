@@ -17,6 +17,11 @@ export class EquipoAjaxService {
         return this.oHttpClient.get<IEquipo>(this.sUrl + "/" + id);
     }
 
+    getAll(): Observable<IEquipo[]> {
+        console.log('Haciendo solicitud a getAll en EquipoAjaxService');
+        return this.oHttpClient.get<IEquipo[]>(this.sUrl);
+    }
+
     getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string): Observable<IEquipoPage> {
         if (!size) size = 10;
         if (!page) page = 0;

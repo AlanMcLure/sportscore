@@ -73,15 +73,17 @@
           </td>
           <td>
             <a
+              *ngIf="jugador.equipo"
               [routerLink]="[
                 '/admin',
                 'jugador',
                 'plist',
                 'byequipo',
-                jugador.equipo.id
+                jugador.equipo?.id
               ]"
-              >({{ jugador.equipo.id }}) {{ jugador.equipo.nombre }}</a
+              >({{ jugador.equipo?.id }}) {{ jugador.equipo?.nombre }}</a
             >
+            <span *ngIf="!jugador.equipo">Sin equipo</span>
           </td>
           <td class="text-center">
             <div
