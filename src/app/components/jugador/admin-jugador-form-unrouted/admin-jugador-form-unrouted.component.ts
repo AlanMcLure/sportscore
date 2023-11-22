@@ -134,7 +134,7 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
     }
   }
 
-  onShowUsersSelection() {
+  onShowEquiposSelection() {
     this.oDynamicDialogRef = this.oDialogService.open(AdminEquipoSelectionUnroutedComponent, {
       header: 'Selecciona un Equipo',
       width: '80%',

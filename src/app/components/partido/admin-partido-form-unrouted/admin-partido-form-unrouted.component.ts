@@ -124,7 +124,7 @@ export class AdminPartidoFormUnroutedComponent implements OnInit {
         // Verifica si el equipo ya ha sido seleccionado como equipo visitante
         if (this.oPartido.equipoVisitante && this.oPartido.equipoVisitante.id === oEquipo.id) {
           // Equipo ya seleccionado como visitante, muestra un mensaje o realiza la lógica necesaria
-          console.error('Este equipo ya ha sido seleccionado como equipo visitante.');
+          this.matSnackBar.open('Este equipo ya ha sido seleccionado como visitante', 'Cerrar', { duration: 3000 });
         } else {
           this.oPartido.equipoLocal = oEquipo;
           this.partidoForm.controls['equipoLocal'].patchValue({ id: oEquipo.id });
@@ -147,7 +147,7 @@ export class AdminPartidoFormUnroutedComponent implements OnInit {
         // Verifica si el equipo ya ha sido seleccionado como equipo local
         if (this.oPartido.equipoLocal && this.oPartido.equipoLocal.id === oEquipo.id) {
           // Equipo ya seleccionado como local, muestra un mensaje o realiza la lógica necesaria
-          console.error('Este equipo ya ha sido seleccionado como equipo local.');
+          this.matSnackBar.open('Este equipo ya ha sido seleccionado como local', 'Cerrar', { duration: 3000 });
         } else {
           this.oPartido.equipoVisitante = oEquipo;
           this.partidoForm.controls['equipoVisitante'].patchValue({ id: oEquipo.id });
