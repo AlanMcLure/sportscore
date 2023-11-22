@@ -11,6 +11,7 @@ import { IEquipo } from 'src/app/model/model.interfaces';
 export class HomeRoutedComponent implements OnInit {
 
   equipoId: number = 17;
+  partidoId: number = 1;
   
 
   constructor(
