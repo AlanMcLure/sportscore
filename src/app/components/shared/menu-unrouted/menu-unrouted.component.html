@@ -54,6 +54,12 @@
 
       <span class="navbar-text mx-1" *ngIf="strUserName">
         Logged as {{ strUserName }}
+        <button
+          class="btn btn-warning"
+          [routerLink]="['/admin', 'jugador', 'edit', oSessionJugador?.id]"
+        >
+          <i class="pi pi-pencil"></i>
+        </button>
       </span>
       <span class="navbar-text mx-1" *ngIf="!strUserName"> Not logged in </span>
       <span class="navbar-text mx-1">

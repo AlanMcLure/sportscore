@@ -167,6 +167,7 @@
           aria-label="Tipo de usuario"
           formControlName="role"
           required
+          *ngIf="oSessionJugador?.role == false"
         >
           <mat-radio-button [value]="true">Admin</mat-radio-button>
           <mat-radio-button [value]="false">Jugador</mat-radio-button>

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { IJugador, IEquipo, formOperation } from 'src/app/model/model.interfaces';
 import { JugadorAjaxService } from 'src/app/service/jugador.ajax.service.service';
+import { SessionAjaxService } from 'src/app/service/session.ajax.service.ts.service';
 import { AdminEquipoSelectionUnroutedComponent } from '../../equipo/admin-equipo-selection-unrouted/admin-equipo-selection-unrouted.component';
 import { CALENDAR_ES } from 'src/environment/environment';
 
@@ -24,17 +25,29 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
   jugadorForm!: FormGroup;
   oJugador: IJugador = { fechaNacimiento: new Date(Date.now()), equipo: {} } as IJugador;
   status: HttpErrorResponse | null = null;
+  strUserName: string = "";
+  oSessionJugador: IJugador | null = null;
+  strUrl: string = "";
 
   oDynamicDialogRef: DynamicDialogRef | undefined;
 
   constructor(
     private oFormBuilder: FormBuilder,
+    private oSessionService: SessionAjaxService,
     private oJugadorAjaxService: JugadorAjaxService,
     private oRouter: Router,
     private oMatSnackBar: MatSnackBar,
     public oDialogService: DialogService
   ) {
     this.initializeForm(this.oJugador);
+    this.oJugadorAjaxService.getByUsername(this.oSessionService.getUsername()).subscribe({
+      next: (oJugador: IJugador) => {
+        this.oSessionJugador = oJugador;
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    });
   }
 
   initializeForm(oJugador: IJugador) {
@@ -105,6 +118,10 @@ export class AdminJugadorFormUnroutedComponent implements OnInit {
             this.oJugador = data;
             console.log(this.jugadorForm.value);
             this.initializeForm(this.oJugador);
+            if (this.oSessionJugador && data.username) {
+              // Actualizar el usuario de sesión después de la actualización
+              this.oSessionJugador.username = data.username;
+            }
             this.oMatSnackBar.open("El jugador ha sido actualizado.", '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'jugador', 'view', this.oJugador.id]);
           },
