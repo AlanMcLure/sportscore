@@ -1,46 +1,15 @@
 <div class="container-fluid px-5">
-  
-    <div class="row align-items-start">
-      <div class="col-xxl-12 text-center p-3 mt-2">
-        <h1 class="title">SPORTSCORE</h1>
-        <h2 class="subtitle">Tus resultados deportivos</h2>
-      </div>
-    </div>
-    <div class="row align-items-start">
-      <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 threads">
-        <!-- <admin-partido-plist-unrouted ></admin-partido-plist-unrouted> -->
-      </div>
-      <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 replies">
-        <!-- <app-user-reply-plist-unrouted [id_thread]="idThread"></app-user-reply-plist-unrouted> -->
-      </div>
-      <div class="col-xxl-2 col-xl-2 col-lg-2 info">
-        <div class="card">
-          <div class="card-header">
-            Jugadores
-          </div>
-          <div class="card-body">
-            <ul>
-              <li>Jugador 1</li>
-            </ul>
-          </div>
-        </div>
-        <!--
-          <div class="card mt-3">
-          <div class="card-header">
-            Featured Threads
-          </div>
-          <div class="card-body">
-            <ul>
-              <li>User 1</li>
-              <li>User 2</li>
-              <li>User 3</li>
-              <li>User 4</li>
-              <li>User 5</li>
-            </ul>
-          </div>
-        </div>
-        -->
-        <app-admin-partido-detail-unrouted [id]="partidoId"></app-admin-partido-detail-unrouted>
-      </div>
+  <div class="row align-items-start">
+    <div class="col-xxl-12 text-center p-3 mt-2">
+      <h1 class="title">SPORTSCORE</h1>
+      <h2 class="subtitle">Tus resultados deportivos</h2>
     </div>
   </div>
+  <div class="row align-items-start">
+    <div>
+      <app-user-partido-resultados-unrouted
+        [id]="equipoId"
+      ></app-user-partido-resultados-unrouted>
+    </div>
+  </div>
+</div>

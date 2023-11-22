@@ -169,8 +169,8 @@
           required
           *ngIf="oSessionJugador?.role == false"
         >
-          <mat-radio-button [value]="true">Admin</mat-radio-button>
-          <mat-radio-button [value]="false">Jugador</mat-radio-button>
+          <mat-radio-button [value]="false">Admin</mat-radio-button>
+          <mat-radio-button [value]="true">Jugador</mat-radio-button>
           <mat-error *ngIf="hasError('role', 'required')"
             >El tipo de usuario es requerido</mat-error
           >

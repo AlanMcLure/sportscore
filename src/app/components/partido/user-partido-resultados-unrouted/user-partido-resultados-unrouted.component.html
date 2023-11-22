@@ -1,0 +1,25 @@
+<!-- user-partido-card.component.html -->
+
+<div class="card-container">
+  <div *ngFor="let partido of oPage?.content" class="card">
+    <div class="card-header">
+      <span class="date">{{ partido.fechaPartido }}</span>
+    </div>
+    <div class="card-body">
+      <div class="team local">
+        <span class="team-name">{{ partido.equipoLocal.nombre }}</span>
+      </div>
+      <div class="result">
+        <span>{{ partido.resultado }}</span>
+      </div>
+      <div class="team visitor">
+        <span class="team-name">{{ partido.equipoVisitante.nombre }}</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" (click)="doView(partido)">
+        Ver Detalles
+      </button>
+    </div>
+  </div>
+</div>

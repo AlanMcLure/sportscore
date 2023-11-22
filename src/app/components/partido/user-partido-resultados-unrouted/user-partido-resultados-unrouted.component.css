@@ -1,0 +1,46 @@
+/* user-partido-card.component.css */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 10px;
+  width: 300px;
+}
+
+.card-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.team {
+  width: 40%;
+}
+
+.result {
+  width: 20%;
+  text-align: center;
+}
+
+.team-name {
+  font-weight: bold;
+}
+
+.card-footer {
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+}

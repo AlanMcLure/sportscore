@@ -46,6 +46,7 @@ import { AdminPartidoNewRoutedComponent } from './components/partido/admin-parti
 import { AdminPartidoFormUnroutedComponent } from './components/partido/admin-partido-form-unrouted/admin-partido-form-unrouted.component';
 import { AdminEquipoViewRoutedComponent } from './components/equipo/admin-equipo-view-routed/admin-equipo-view-routed.component';
 import { AdminEquipoEditRoutedComponent } from './components/equipo/admin-equipo-edit-routed/admin-equipo-edit-routed.component';
+import { UserPartidoResultadosUnroutedComponent } from './components/partido/user-partido-resultados-unrouted/user-partido-resultados-unrouted.component';
 import { TrimPipe } from './pipes/trim.pipe.ts.pipe';
 import { JugadorAjaxService } from './service/jugador.ajax.service.service';
 import { EquipoAjaxService } from './service/equipo.ajax.service.service';
@@ -95,6 +96,7 @@ import { CryptoService } from './service/crypto.service';
     AdminPartidoPlistUnroutedComponent,
     AdminPartidoDetailUnroutedComponent,
     AdminPartidoFormUnroutedComponent,
+    UserPartidoResultadosUnroutedComponent
     //--    
   ],
   imports: [
